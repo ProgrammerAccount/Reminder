@@ -103,13 +103,11 @@
         <td class="td_date">
           <input [owlDateTimeTrigger]="dt" [ngModel]="task.date" #dateField (change)="DateChange(task,dateField)"
             [owlDateTime]="dt">
-
           <owl-date-time #dt></owl-date-time>
         </td>
         <td class="td_queue"><input [(ngModel)]="task.queue" [ngModelOptions]="{updateOn: 'blur'}" class="queueIN d-none d-md-block"
             (focusout)="QuePosiotnChange(task)"></td>
         <td class="td_project">
-
           <mat-form-field class='projectIN'>
               <mat-select matNativeControl [(ngModel)]="task.project">
                 <mat-option value='0'>NONE</mat-option>

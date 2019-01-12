@@ -1,15 +1,11 @@
-import { Component, OnInit, SimpleChange, SimpleChanges, OnDestroy, AfterContentInit, Directive } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Task } from './task';
 import {AddRemoveTask} from './add-remove-task';
-import LOCAL_STORAGE_NAMES from '../LocalStorageVariabile';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DBAPI } from '../DBAPI.service';
-import { NONE_TYPE } from '@angular/compiler/src/output/output_ast';
 import { CommentsManager } from '../comments';
-import { Observable } from 'rxjs';
 
 
-declare var jQuery: any;
 @Component({
   selector: 'app-to-do',
   templateUrl: './to-do.component.html',
@@ -19,22 +15,26 @@ declare var jQuery: any;
 //https://danielykpan.github.io/date-time-picker/
 
 export class ToDoComponent  implements OnInit, OnDestroy {
+  // tslint:disable-next-line:quotemark
+  @Input() id_project: number;
   TodayDate: Date;
   commentManager: CommentsManager;
   projects: string[];
+  TM: AddRemoveTask;
   lastTaskDate: Date = new Date();
   tasksSubscription: Subscription;
-  constructor(private connectionAPI: DBAPI, private TM: AddRemoveTask) {
+  constructor(private connectionAPI: DBAPI) {
+    console.log(this.id_project);
     this.TodayDate = new Date();
-    this.commentManager = new CommentsManager(connectionAPI);
-//    this.projects = this.GetProjectsTitle();
+
   }
 
   ngOnDestroy(): void {
     this.tasksSubscription.unsubscribe();
   }
   ngOnInit(): void {
-
+    this.commentManager = new CommentsManager(this.connectionAPI);
+    this.TM =  new AddRemoveTask(this.connectionAPI , this.id_project);
   }
 
 

@@ -25,7 +25,7 @@ export class GoalsComponent implements OnInit, OnDestroy {
   }
   // tslint:disable-next-line:max-line-length
   AddTaskButtonClick(title: HTMLInputElement, date: HTMLInputElement, description: HTMLInputElement, project: HTMLInputElement, addTaskForm: any, thisButton: any) {
-    this.TM.AddTask(title.value,  date.value, parseInt(project.value, 10));
+    // this.TM.AddTask(title.value,  date.value, parseInt(project.value, 10));
    this.ResetInputStep(title, date, description, addTaskForm, thisButton);
 
     }
@@ -78,13 +78,13 @@ export class GoalsComponent implements OnInit, OnDestroy {
   }
   RemoveStep(step: Task)
   {
-    this.TM.RemoveTask(step);
+    // this.TM.RemoveTask(step);
   }
   DateChange(task: Task, dateField: any) {
     const date = dateField.value;
     if (date.toString() !== '')
     {
-      this.TM.ChangeTaskDate(task,  date);
+      // this.TM.ChangeTaskDate(task,  date);
     }
     else
     {
@@ -95,7 +95,7 @@ export class GoalsComponent implements OnInit, OnDestroy {
   {
     return date.toISOString().substring(0, 10);
   }
-  constructor(private connectionAPI: DBAPI, private TM: AddRemoveTask) {
+  constructor(private connectionAPI: DBAPI ) {
     this.TodayDate = this.DateToStringYYYYMMDD(new Date());
     this.goalsManager = new AddRemoveGoals(this.connectionAPI);
    }

@@ -1,6 +1,7 @@
 @import url("../date.css");
 @import url("./goal-table.css");
 @import url("./goalStyle.css");
+@import url("./stepsStyle.css");
 .btnRemove{
     width: 35px;
     height: 35px;

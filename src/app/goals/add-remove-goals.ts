@@ -1,17 +1,16 @@
 import { Goal } from './goal';
 import { DBAPI } from '../DBAPI.service';
-import TASK_MANAGER from '../to-do/add-remove-task';
 import { Subscription } from 'rxjs/internal/Subscription';
 export class AddRemoveGoals {
 
     goals: Goal[];
-    TM = TASK_MANAGER;
     goalSubscrion: Subscription;
     TodayDate: string;
     constructor(connectionAPI: DBAPI)
     {
         this.goalSubscrion = connectionAPI.getObjects('projects').subscribe(res => {
             this.goals = res;
+            console.log(res);
         },
         console.error);
     }

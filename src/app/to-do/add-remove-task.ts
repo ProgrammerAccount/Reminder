@@ -23,13 +23,17 @@ export class AddRemoveTask {
   tasks: Task[];
   tasksSubscription: Subscription;
 
-  constructor(private connectionAPI: DBAPI) {
+  constructor(private connectionAPI: DBAPI, id_project: number = 0) {
     if (this.tasks === undefined) {
       this.tasks = new Array();
     }
-
+    let TaskURL = 'tasks';
+    if (id_project !== 0)
+    {
+      TaskURL = TaskURL + '/' + id_project;
+    }
     this.tasksSubscription = this.connectionAPI
-    .getObjects('tasks')
+    .getObjects(TaskURL)
     .subscribe(res => {
       this.tasks = res;
       this.sortTaskByQueue(this.tasks);

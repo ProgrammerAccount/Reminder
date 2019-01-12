@@ -12,14 +12,14 @@
         </td>
 
         <td class="td_icon">
-          <button mat-icon-button>
+          <button mat-icon-button (click)="HideShowElement(stepsContainer)">
             <mat-icon>keyboard_arrow_down</mat-icon>
           </button>
         </td>
       </tr>
     </table>
-    <div class="stepsContainer">
-      <app-to-do></app-to-do>
+    <div #stepsContainer class="stepsContainer">
+      <app-to-do [id_project] = "goal.id"></app-to-do>
     </div>
   </div>
 </main>
