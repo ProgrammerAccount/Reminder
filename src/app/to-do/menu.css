@@ -1,0 +1,14 @@
+.menu
+{
+    background: rgb(226, 224, 224);
+    position: fixed;
+    height: 500px;
+    display: none;
+    width: 200px;
+
+}
+.menu td 
+{
+    position: relative;
+    width: 200px;
+}

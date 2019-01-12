@@ -1,0 +1,116 @@
+
+.ADDtd_title
+{
+  width:85%;
+}
+.ADDtd_project
+{
+  width:15%;
+}
+.ADDtd_priority{
+  width: 5%;
+}
+.ADDtd_date{
+  width: 25%;
+}
+.ADDtd_emptySpace{
+  width: 50%;
+}
+.ADDtd_SubmitButton{
+  width: 20%;
+}
+#date{
+  width: 100%;
+  font-size: 13px;
+}
+#btnSubmitAddTask {
+  position: relative;
+  height: auto;
+  padding: 7px;
+  background: #f44242;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  bottom: 2px;
+
+}
+
+.addTask {
+  width: 100%;
+  display: none;
+  height: 60px;
+  padding: 0;
+  margin-bottom: 100px;
+}
+
+.AddTaskButton {
+  margin: 0 0 0 0px;
+  padding: 9px;
+  background: #f44242;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  box-sizing: border-box;
+  cursor: pointer;
+
+}
+
+#project {
+  position: relative;
+  height: 35px;
+  bottom: 2px;
+  box-sizing: border-box;
+
+}
+
+#title {
+  padding: 5px;
+  border-radius: 3px;
+  height: 35px;
+  width: 100%;
+  box-sizing: border-box;
+}
+#project {
+  padding: 2px;
+  margin-top: 4px;
+  font-size: 13px;
+  width: 100%;
+}
+#btnCancelAddTask {
+  width: 100%;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+
+}
+#btnSubmitAddTask {
+  width: 100%;
+  cursor: pointer;
+
+}
+@media only screen and (max-width: 768px)
+{
+  #btnSubmitAddTask{
+    padding: 4px;
+  }
+  .ADDtd_priority{
+    width: 5%;
+  }
+  .ADDtd_date{
+    width: 25%;
+  }
+  .ADDtd_emptySpace{
+    width: 20%;
+  }
+  .ADDtd_SubmitButton{
+    width: 30% !important;
+  }
+  .ADDtd_title
+{
+  width:70%;
+}
+.ADDtd_project
+{
+  width:30%;
+}
+}

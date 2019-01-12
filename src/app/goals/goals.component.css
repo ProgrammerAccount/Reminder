@@ -1,0 +1,82 @@
+@import url("../date.css");
+@import url("./goal-table.css");
+@import url("./goalStyle.css");
+.btnRemove{
+    width: 35px;
+    height: 35px;
+    margin-top: 10px; 
+    display: inline-block;
+    vertical-align: top;
+}
+body{
+    margin:0;
+    padding: 0;
+
+}
+.container{
+    max-width: 700px;
+    width: 100vw;
+    margin: auto;
+}
+.task{
+    border-bottom: 1px solid #f0f0f0;
+}
+li{
+    max-width: 700px;
+    width: 100vw;
+    margin: auto;  
+}
+ul{
+    list-style-type: none;
+}
+.Goaltitle
+{
+    border: none;
+    font-size: 14px;
+    max-height: 24px;
+    padding: 6px;
+    margin: 10px;
+    border:solid 1px black;
+}
+input[type="data"]
+{
+    margin: 10px;
+}
+.show{
+    width:31px;
+    height: 31px;
+    border: 0;
+    background: transparent;
+    vertical-align: middle;
+}
+.show img{
+    width:31px;
+    height: 31px;
+
+}
+.description{
+    border: none;
+    font-size: 12px;
+    padding: 6px;
+    margin: 10px; 
+    max-width: 1000px;
+    width: 50vw; 
+}
+.OptionsForm
+{
+    display: none;
+    max-width: 700px;
+    width: 100vw; 
+}
+.addTask{
+    display: none;
+    padding: 0 40px 0 40px;
+}
+.AddGoalButton{
+    margin: 0 0 0 40px;
+    padding: 12px;
+    background:#f44242;
+    border:none;
+    border-radius: 5px;
+    color: #fff;
+}

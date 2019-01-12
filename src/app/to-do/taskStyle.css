@@ -1,0 +1,46 @@
+.task {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.titleIN {
+  border: none;
+  font-size: 14px;
+  height: 40px;
+  padding: 6px;
+  width: 100%;
+}
+
+.queueIN {
+  text-align: center;
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  padding: 6px;
+  font-size: 13px;
+}
+
+.priorityIN {
+text-align: center;
+}
+
+.icon {
+  font-size: 32px;
+  margin-top: 6px;
+}
+
+.projectIN {
+  padding: 2px;
+  margin-top: 10px;
+  font-size: 13px;
+
+}
+
+.checkbox
+{
+  margin: 0 !important;
+}
+.dateIN {
+    margin-top: 10px;
+    width: 100%;
+    font-size: 13px;
+  }

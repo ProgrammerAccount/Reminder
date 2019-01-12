@@ -1,0 +1,77 @@
+.commentWindow {
+  padding: 10px;
+  display: none;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: fixed;
+  width: 100%;
+  max-width: 700px;
+  height: 80vh;
+  background: rgb(226, 224, 224);
+  z-index: 1000;
+  border-radius: 5px;
+
+}
+.titleInComment{
+  background: rgb(226, 224, 224);
+
+}
+.commentWindow .title
+{
+  width: 100%;
+} 
+.commentIN{
+  width: calc(100% - 40px);
+  position: relative;
+  height: 36px;
+  border: none;
+  
+  top:-3px;
+}
+#AddCommentBtn
+{
+  bottom: 10px;
+  position: absolute;
+  width: 100px;
+  right: 10px;
+  height: 40px;
+
+  background-color: #f44242;
+  border-radius: 0 !important;
+}
+#ADDComment
+{
+left: 10px;
+ bottom: 10px;
+ height: 40px;
+ position: absolute;
+ width: calc(100% - 110px);
+}
+.commentWindow > ul
+{
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  width: 95%;
+  max-height: calc(100% - 140px);
+}
+.commentWindow > ul >li{
+  list-style-type: none;
+  width: 100%;
+  margin: 0 0 5px 0;
+  padding: 0;
+  height: 36px;
+}
+.trashIcon{
+  display: inline-block;
+  max-width: 40px;
+  font-size: 24px;
+}
+.CommentWindowCloseBtn {
+  position: relative;
+  margin-top: 5px;
+  margin-right: 5px;
+  float: right;
+
+}
