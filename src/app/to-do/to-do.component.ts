@@ -132,6 +132,12 @@ export class ToDoComponent  implements OnInit, OnDestroy {
   {
     this.TM.EditTask(task);
   }
+
+  HideShowElement(el: any): void {
+
+    const display = window.getComputedStyle(el).getPropertyValue('display');
+    if (display !== 'none') { el.style.display = 'none'; } else { el.style.display = 'block'; }
+  }
   LoadComments(task: Task)
   {
     this.commentManager.getComments(task);

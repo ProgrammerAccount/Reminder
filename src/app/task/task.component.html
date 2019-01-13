@@ -14,7 +14,11 @@
       </button>
     </td>
     <div #commentWindow style="display: none">
-      <app-comment [(task)]="task"></app-comment>
+      <app-comment [(task)]="task">
+        <button (click)="HideShowElement(commentWindow)" mat-icon-button>
+          <mat-icon>close</mat-icon>
+        </button>
+      </app-comment>
     </div>
 
     <td class="td_icon">
