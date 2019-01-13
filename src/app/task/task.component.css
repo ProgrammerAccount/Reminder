@@ -1,0 +1,118 @@
+.task {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .titleIN {
+    border: none;
+    font-size: 14px;
+    height: 40px;
+    padding: 6px;
+    width: 100%;
+  }
+  
+  .queueIN {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+    padding: 6px;
+    font-size: 13px;
+  }
+  
+  .priorityIN {
+  text-align: center;
+  }
+  
+  .icon {
+    font-size: 32px;
+    margin-top: 6px;
+  }
+  
+  .projectIN {
+    padding: 2px;
+    margin-top: 10px;
+    font-size: 13px;
+  
+  }
+  
+  .checkbox
+  {
+    margin: 0 !important;
+  }
+  .dateIN {
+      margin-top: 10px;
+      width: 100%;
+      font-size: 13px;
+    }
+    .header
+{
+  text-align: center;
+  width: 100%;
+}
+table {
+  width: 100%;
+  margin-bottom: 5px;
+}
+.btnRemove {
+  width: 35px;
+  height: 35px;
+  margin-top: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.OptionsForm {
+  display: none;
+  max-width: 1000px;
+  width: 100vw;
+  height: 70px;
+}
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+    @media only screen and (max-width:768px) {
+        .td_done {
+          width: 2%;
+        }
+      
+        .td_title {
+          width: 82%;
+        }
+      
+        .td_iconComment {
+          width: 2%;
+        }
+      
+        .td_date {
+          display: none;
+      
+        }
+      
+        .td_queue {
+          display: none;
+        }
+      
+        .td_project {
+          width: 10%;
+        }
+      
+        .td_iconMenu {
+          width: 4%;
+        }
+      }
+      
+      .td_done {
+        width: 2%;
+      }
+      
+      .td_title {
+        width: 470px;
+      }
+      .td_icon{
+        width: 40px;
+      }
+      .td{
+        display: inline-block;
+      }
+      

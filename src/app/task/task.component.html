@@ -1,0 +1,48 @@
+<table>
+  <tr>
+    <td class="td_done">
+      <div style="margin-bottom:-9px">
+        <mat-checkbox [(ngModel)]="task.status" class="checkbox" color="warn" name="done" (click)="RemoveTask()"></mat-checkbox>
+      </div>
+    </td>
+    <td class="td_title">
+      <input (change)="EditTask()" [(ngModel)]="task.title" class="titleIN" type="text">
+    </td>
+    <td class="td_icon">
+      <button mat-icon-button (click)="HideShowElement(commentWindow); LoadComments(task)">
+        <mat-icon>comment</mat-icon>
+      </button>
+    </td>
+    <div #commentWindow style="display: none">
+      <app-comment [(task)]="task"></app-comment>
+    </div>
+
+    <td class="td_icon">
+      <button mat-icon-button>
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+    </td>
+    <td class="td_icon">
+      <button mat-icon-button>
+        <mat-icon>stop</mat-icon>
+      </button>
+    </td>
+    <td class="td_icon">
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item [owlDateTimeTrigger]="dtMenu"> <i class="icon-calendar"></i>
+          <span>{{ GetDate(task.date) }}</span>
+          <input #dateField [owlDateTime]="dtMenu" (change)="DateChange(dateField)" [ngModel]="task.date" style="visibility: hidden;">
+          <owl-date-time #dtMenu></owl-date-time>
+        </button>
+
+        <button mat-menu-item (click)="RemoveTask()">
+          <i class="icon-trash-empty"></i>
+          <span>Delete Task</span>
+        </button>
+      </mat-menu>
+    </td>
+  </tr>
+</table>

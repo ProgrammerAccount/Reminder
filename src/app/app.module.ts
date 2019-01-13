@@ -17,6 +17,8 @@ import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule, MatIconModule, MatButtonModule, MatInputModule, MatSelectModule, MatCheckboxModule} from '@angular/material';
+import { TaskComponent } from './task/task.component';
+import { CommentComponent } from './comment/comment.component';
 
 
 
@@ -38,6 +40,8 @@ const appRoutes: Routes = [
     GoalsComponent,
     BodyComponent,
     TimeLogerComponent,
+    TaskComponent,
+    CommentComponent,
     ],
   imports: [
     FormsModule,

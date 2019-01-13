@@ -1,0 +1,21 @@
+<div class="commentWindow">
+  <button class="CommentWindowCloseBtn" #closeBtn (click)="HideShowElement(commentWindow)" mat-icon-button>
+      <mat-icon>close</mat-icon>
+  </button>
+
+<ul>
+  <li *ngFor="let comment of commentsObserwable$ | async as comments; let index = index">
+    <input class="commentIN" [(ngModel)]="comment.value"  id="{{index}}" (focusout)="CommentChange(comment , task)">
+    <div class="icon-trash-empty trashIcon" (click)="RemoveComment(comment); LoadComments(task)"></div>
+  </li>
+  <li>
+
+    <input #com id="ADDComment" type="text">
+    <button mat-icon-button id="AddCommentBtn" (click)="AddComment(com,task); ResteCommentInput(com)">
+      <mat-icon>add</mat-icon>
+      Add
+    </button>
+  </li>
+</ul>
+
+</div>
