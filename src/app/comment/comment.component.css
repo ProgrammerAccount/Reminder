@@ -12,6 +12,15 @@
     border-radius: 5px;
   
   }
+  .title{
+    padding: 20px 20px 20px 0;
+    max-height: 100px;
+    max-width: 600px;
+    padding: 2px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: auto;
+  }
   .titleInComment{
     background: rgb(226, 224, 224);
   

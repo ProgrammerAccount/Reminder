@@ -9,12 +9,12 @@
       <input (change)="EditTask()" [(ngModel)]="task.title" class="titleIN" type="text">
     </td>
     <td class="td_icon">
-      <button mat-icon-button (click)="HideShowElement(commentWindow); LoadComments(task)">
+      <button mat-icon-button (click)="HideShowElement(commentWindow);">
         <mat-icon>comment</mat-icon>
       </button>
     </td>
     <div #commentWindow style="display: none">
-      <app-comment [(task)]="task">
+      <app-comment [(object)]="task">
         <button (click)="HideShowElement(commentWindow)" mat-icon-button>
           <mat-icon>close</mat-icon>
         </button>
@@ -43,7 +43,7 @@
         </button>
 
         <button mat-menu-item (click)="RemoveTask()">
-          <i class="icon-trash-empty"></i>
+          <mat-icon>delete</mat-icon>
           <span>Delete Task</span>
         </button>
       </mat-menu>

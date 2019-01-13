@@ -12,43 +12,41 @@ import { EventEmitter } from 'events';
 
 export class CommentComponent implements OnInit {
 
-  _task: Task;
+  _object: Task;
   comments: Comment[];
-  commentsObserwable$: Observable<Comment>;
   @Output() taskChanged = new EventEmitter<Task>();
   @Input()
-  get task()
-  {
-    return this._task;
+  get object() {
+    return this._object;
   }
-  set task(value)
-  {
-    this._task = value;
+  set object(value) {
+    this._object = value;
     this.taskChanged.emit(value);
   }
   ngOnInit(): void {
-    this.commentsObserwable$ = this.connectionAPI.getObjects('task/comments/' + this.task.id + '/' + this.task.id_user);
+    this.getComments();
   }
-  constructor(private connectionAPI: DBAPI) {
-
+  constructor(private connectionAPI: DBAPI) { }
+  ResteCommentInput(input: HTMLInputElement): void {
+    input.value = '';
   }
-  getComments(task: Task): Observable<Comment> {
-    this.commentsObserwable$ = this.connectionAPI.getObjects('task/comments/' + task.id + '/' + task.id_user);
-    return this.commentsObserwable$;
+  getComments() {
+    this.connectionAPI.getObjects('task/comments/' + this.object.id + '/' + this.object.id_user).subscribe(res => {
+      this.comments = res;
+    });
   }
   EditComment(com: Comment) {
-    console.log(com);
     this.connectionAPI.updateObjects('tasks/comments/update', com).subscribe(console.error);
   }
-  AddComment(comment, task) {
-
-    comment = new Comment(0, comment, task.id_user, task.id);
+  AddComment(comment) {
+    comment = new Comment(0, comment.value, this.object.id_user, this.object.id);
     if (comment !== '') {
-      this.connectionAPI.addObjects('tasks/comments/add', comment).subscribe(res => { }, console.error);
+      this.connectionAPI.addObjects('tasks/comments/add', comment).subscribe(res => { this.comments.push(res); }, console.error);
     }
   }
   RemoveComment(comment) {
     this.connectionAPI.removeObject('task/comments/remove/' + comment.id + '/' + comment.id_user).subscribe(console.error);
+    this.comments.splice(comment, 1);
   }
 
 
