@@ -1,22 +1,7 @@
-import { Comment } from '../comments';
-import {
-  Task
-} from './task';
-import LOCAL_STORAGE_NAMES from '../LocalStorageVariabile';
-import {
-  Subscription, from
-} from 'rxjs';
-import {
-  DBAPI
-} from '../DBAPI.service';
-import {
-  HttpErrorResponse,
-  HttpClient,
-  HttpHeaders
-} from '@angular/common/http';
-import {
-  Injectable
-} from '@angular/core';
+import { Task } from './task';
+import { Subscription } from 'rxjs';
+import { DBAPI } from '../DBAPI.service';
+import { Injectable } from '@angular/core';
 @Injectable()
 
 export class AddRemoveTask {
@@ -28,20 +13,19 @@ export class AddRemoveTask {
       this.tasks = new Array();
     }
     let TaskURL = 'tasks';
-    if (id_project !== 0)
-    {
+    if (id_project !== 0) {
       TaskURL = TaskURL + '/' + id_project;
     }
     this.tasksSubscription = this.connectionAPI
-    .getObjects(TaskURL)
-    .subscribe(res => {
-      this.tasks = res;
-      this.sortTaskByQueue(this.tasks);
-      this.sortTaskByDate(this.tasks);
+      .getObjects(TaskURL)
+      .subscribe(res => {
+        this.tasks = res;
+        this.sortTaskByQueue(this.tasks);
+        this.sortTaskByDate(this.tasks);
 
       },
-    console.error
-    );
+        console.error
+      );
   }
 
   AddTask(title: string, date: any, project: number) {
@@ -80,10 +64,8 @@ export class AddRemoveTask {
     });
   }
   QuePosiotnChange(task: Task) { // check that tasks have unique id
-    console.log('array should be sorted afted this operation');
     this.sortTaskByQueue(this.tasks);
     this.sortTaskByDate(this.tasks);
-    console.log(this.tasks);
     let foundSameQueue = false;
     let lastQueueValue = parseInt(task.queue.toString(), 10) + 1;
     this.tasks.forEach(el => {
@@ -102,7 +84,6 @@ export class AddRemoveTask {
     });
     this.sortTaskByQueue(this.tasks);
     this.sortTaskByDate(this.tasks);
-    console.log(this.tasks);
 
   }
 

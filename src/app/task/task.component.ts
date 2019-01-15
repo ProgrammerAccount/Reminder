@@ -42,7 +42,7 @@ export class TaskComponent {
   }
   ChangeTaskDate(date: HTMLInputElement) {
     this.task.date = new Date(date.value);
-    console.log(new Date(date.value).toISOString());
+    this.taskChanged.emit(this.task);
     this.EditTask();
   }
   GetDate(date): string {
