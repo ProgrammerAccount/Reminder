@@ -1,8 +1,7 @@
 <main>
   <div *ngFor="let task of TM.tasks;let index=index" class="task">
     <h3 *ngIf="CanDisplayDate(task)">{{ GetDate(task.date) }}</h3>
-    <app-task [(task)]="task"></app-task>
-
+    <app-task [task]="task" (taskChanged)="TaskUpdate($event)"></app-task>
   </div>
 
   <div #addTaskForm class="addTask">

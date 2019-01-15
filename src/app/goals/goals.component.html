@@ -19,7 +19,9 @@
       </tr>
     </table>
     <div #stepsContainer class="stepsContainer">
-      <app-to-do [id_project] = "goal.id"></app-to-do>
+     <div *ngFor="let task of tasks">
+       <app-task [(task)]="task"></app-task>
+     </div>
     </div>
   </div>
 </main>

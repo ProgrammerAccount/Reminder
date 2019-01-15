@@ -1,7 +1,7 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import {HttpErrorResponse, HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
 
 import { Task } from './to-do/task';
 const API_URL = 'http://localhost:5000';
@@ -11,7 +11,7 @@ export class DBAPI{
     constructor(private http: HttpClient){}
     private static _handleError(e: HttpErrorResponse| any)
     {
-        return Observable.throw(e.message || 'ERROR');
+        return observableThrowError(e.message || 'ERROR');
     }
     getObjects(router: string): Observable<any>
     {

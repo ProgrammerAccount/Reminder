@@ -65,44 +65,6 @@ export class AddRemoveTask {
       );
     }
   }
-  RemoveTask(task: Task) {
-    this.connectionAPI.removeObject('tasks/remove/' + task.id).subscribe(res => { },
-      console.error
-    );
-    this.tasks.splice(this.tasks.indexOf(task), 1);
-
-  }
-  EditTask(task: Task) {
-    this.connectionAPI.updateObjects('tasks/update', <Task>task).subscribe(res => {
-      this.QuePosiotnChange(task);
-      this.sortTaskByQueue(this.tasks);
-      this.sortTaskByDate(this.tasks);
-    },
-      console.error
-    );
-  }
-  CommentChange(value: string, task: Task, index: number) {
-    const i = this.tasks.indexOf(task);
-    // this.tasks[i].comments[index] = value;
-    if (value === '') {
-      this.RemoveComment(index, task);
-    }
-
-  }
-
-
-  RemoveComment(commentIndex, task) {
-    const index = this.tasks.indexOf(task);
-    // this.tasks[index].comments.splice(commentIndex, 1);
-
-  }
-
-  ChangeTaskDate(task: Task, date: Date) {
-    this.tasks[this.tasks.indexOf(task)].date = date;
-    this.QuePosiotnChange(task);
-    this.sortTaskByQueue(this.tasks);
-    this.sortTaskByDate(this.tasks);
-  }
   // tslint:disable:curly
   sortTaskByQueue(task: Task[]): void {
     task.sort((a, b) => {
@@ -111,9 +73,13 @@ export class AddRemoveTask {
   }
 
   sortTaskByDate(task: Task[]): void {
-    task.sort((a, b) => {
+    this.tasks = this.tasks.sort((a, b) => {
       const x = new Date(a.date);
       const y = new Date(b.date);
+      console.log(x.getTime());
+      console.log(y.getTime());
+      console.log(x.getTime() - y.getTime());
+
       return x.getTime() - y.getTime();
     });
   }
@@ -138,6 +104,7 @@ export class AddRemoveTask {
     });
     this.sortTaskByQueue(this.tasks);
     this.sortTaskByDate(this.tasks);
+    console.log(this.tasks);
   }
 
 }

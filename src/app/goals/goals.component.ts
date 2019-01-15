@@ -97,7 +97,7 @@ export class GoalsComponent implements OnInit, OnDestroy {
   }
   constructor(private connectionAPI: DBAPI ) {
     this.TodayDate = this.DateToStringYYYYMMDD(new Date());
-    this.goalsManager = new AddRemoveGoals(this.connectionAPI);
+    this.goalsManager = new AddRemoveGoals(this.connectionAPI,);
    }
 
 

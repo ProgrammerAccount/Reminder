@@ -16,7 +16,6 @@ import { CommentsManager } from '../comments';
 
 export class ToDoComponent  implements OnInit, OnDestroy {
   // tslint:disable-next-line:quotemark
-  @Input() id_project: number;
   TodayDate: Date;
   commentManager: CommentsManager;
   projects: string[];
@@ -24,7 +23,6 @@ export class ToDoComponent  implements OnInit, OnDestroy {
   lastTaskDate: Date = new Date();
   tasksSubscription: Subscription;
   constructor(private connectionAPI: DBAPI) {
-    console.log(this.id_project);
     this.TodayDate = new Date();
 
   }
@@ -34,17 +32,16 @@ export class ToDoComponent  implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.commentManager = new CommentsManager(this.connectionAPI);
-    this.TM =  new AddRemoveTask(this.connectionAPI , this.id_project);
+    this.TM =  new AddRemoveTask(this.connectionAPI);
   }
 
-
-  QuePosiotnChange(task: Task): void {
+  TaskUpdate(task)
+  {
     this.TM.QuePosiotnChange(task);
+
   }
-  RemoveTask(task: Task): void {
-    this.TM.RemoveTask(task);
-  }
-  // tslint:disable-next-line:max-line-length
+
+    // tslint:disable-next-line:max-line-length
   AddTaskButtonClick(title: HTMLInputElement, date: HTMLInputElement, project: HTMLInputElement, addTaskForm: any, thisButton: any): void {
     this.TM.AddTask(title.value, new Date(date.value), parseInt(project.value, 10));
     this.ResetInput(title, date, addTaskForm, thisButton);
@@ -67,15 +64,6 @@ export class ToDoComponent  implements OnInit, OnDestroy {
 
     return false;
   }
-  DateChange(task: Task, dateField: any): void {
-    const date = dateField.value;
-    if (date !== undefined && date.toString() !== '') {
-      this.TM.ChangeTaskDate(task, date);
-    }
-    else {
-      dateField.value = task.date;
-    }
-  }
   DateToString(date: Date): string {
     return date.toISOString().substring(0, 10);
   }
@@ -86,7 +74,15 @@ export class ToDoComponent  implements OnInit, OnDestroy {
 
     return new Date(y, m, d);
   }
-  GetDate(dateString: string): string {
+  GetDate(dateArg): string {
+    let dateString;
+    if (typeof dateArg === 'string' )
+    {
+      dateString = dateArg;
+    }else
+    {
+      dateString = dateArg.toISOString();
+    }
     if (dateString.length > 50) {
     dateString = dateString.substring(8, 18);
     }
@@ -126,11 +122,6 @@ export class ToDoComponent  implements OnInit, OnDestroy {
   }
   ResteCommentInput(input: HTMLInputElement): void {
     input.value = '';
-  }
-
-  TaskChange(task: Task)
-  {
-    this.TM.EditTask(task);
   }
 
   HideShowElement(el: any): void {

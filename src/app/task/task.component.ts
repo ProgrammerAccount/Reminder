@@ -40,11 +40,20 @@ export class TaskComponent {
     const display = window.getComputedStyle(el).getPropertyValue('display');
     if (display !== 'none') { el.style.display = 'none'; } else { el.style.display = 'block'; }
   }
-  ChangeTaskDate(date: Date) {
-    this.task.date = date;
+  ChangeTaskDate(date: HTMLInputElement) {
+    this.task.date = new Date(date.value);
+    console.log(new Date(date.value).toISOString());
     this.EditTask();
   }
-  GetDate(dateString: string): string {
+  GetDate(date): string {
+    let dateString;
+    if (typeof date === 'string' )
+    {
+      dateString = date;
+    }else
+    {
+      dateString = date.toISOString();
+    }
     if (dateString.length > 50) {
     dateString = dateString.substring(8, 18);
     }

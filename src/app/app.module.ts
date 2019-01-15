@@ -13,7 +13,6 @@ import { TimeLogerComponent } from './time-loger/time-loger.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { DBAPI } from './DBAPI.service';
 import {HttpClientModule} from '@angular/common/http';
-import { AngularDateTimePickerModule } from 'angular2-datetimepicker';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule, MatIconModule, MatButtonModule, MatInputModule, MatSelectModule, MatCheckboxModule} from '@angular/material';
@@ -56,7 +55,6 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatCheckboxModule,
     MatInputModule,
-    AngularDateTimePickerModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true})
   ],
   providers: [DBAPI, AddRemoveTask, {provide: APP_BASE_HREF, useValue : './' }],
