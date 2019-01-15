@@ -38,9 +38,7 @@ export class ToDoComponent  implements OnInit, OnDestroy {
   TaskUpdate(task)
   {
     this.TM.QuePosiotnChange(task);
-    console.log('aaa');
   }
-
     // tslint:disable-next-line:max-line-length
   AddTaskButtonClick(title: HTMLInputElement, date: HTMLInputElement, project: HTMLInputElement, addTaskForm: any, thisButton: any): void {
     this.TM.AddTask(title.value, new Date(date.value), parseInt(project.value, 10));
@@ -64,9 +62,7 @@ export class ToDoComponent  implements OnInit, OnDestroy {
 
     return false;
   }
-  DateToString(date: Date): string {
-    return date.toISOString().substring(0, 10);
-  }
+
   StringToDate(date: string): Date { // string in format ISO_STRING
     const y = parseInt(date.substring(0, 4), 10);
     const m = parseInt(date.substring(5, 7), 10);
@@ -87,14 +83,13 @@ export class ToDoComponent  implements OnInit, OnDestroy {
     dateString = dateString.substring(8, 18);
     }
     const date = this.StringToDate(dateString.substring(0, 10));
-    const today = this.TodayDate;
+    const today = this.StringToDate(new Date().toISOString().substring(0, 10));
     const DateInMilliseconds = Math.round(date.getTime() / (1000 * 60 * 60 * 24));
 
     // tslint:disable-next-line:no-bitwise
     const TodayDateInMilliseconds = Math.round(today.getTime() / (1000 * 60 * 60 * 24));
     // tslint:disable-next-line:no-bitwise
     const Difference = (DateInMilliseconds - TodayDateInMilliseconds);
-
     if (Difference === 0) {
       return 'Today';
     }
@@ -109,17 +104,6 @@ export class ToDoComponent  implements OnInit, OnDestroy {
       return dateString.substring(0, 10);
     }
   }
-  AddComment(comment: HTMLInputElement, task): void {
-    this.commentManager.AddComment(comment.value, task);
-    this.commentManager.getComments(task);
-
-  }
-  CommentChange(comment): void {
-    this.commentManager.EditComment(comment);
-  }
-  RemoveComment(comment): void {
-    this.commentManager.RemoveComment(comment);
-  }
   ResteCommentInput(input: HTMLInputElement): void {
     input.value = '';
   }
@@ -129,10 +113,5 @@ export class ToDoComponent  implements OnInit, OnDestroy {
     const display = window.getComputedStyle(el).getPropertyValue('display');
     if (display !== 'none') { el.style.display = 'none'; } else { el.style.display = 'block'; }
   }
-  LoadComments(task: Task)
-  {
-    this.commentManager.getComments(task);
-  }
-
 
 }
