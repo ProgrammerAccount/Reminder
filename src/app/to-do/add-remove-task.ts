@@ -4,19 +4,21 @@ import { DBAPI } from '../DBAPI.service';
 import { Injectable } from '@angular/core';
 @Injectable()
 
-export class AddRemoveTask {
+export class TaskManager {
   tasks: Task[];
-  tasksSubscription: Subscription;
 
   constructor(private connectionAPI: DBAPI, id_project: number = 0) {
     if (this.tasks === undefined) {
       this.tasks = new Array();
     }
+    this.GetTasks(id_project);
+  }
+  GetTasks(id_project) {
     let TaskURL = 'tasks';
     if (id_project !== 0) {
       TaskURL = TaskURL + '/' + id_project;
     }
-    this.tasksSubscription = this.connectionAPI
+    this.connectionAPI
       .getObjects(TaskURL)
       .subscribe(res => {
         this.tasks = res;
@@ -27,8 +29,24 @@ export class AddRemoveTask {
         console.error
       );
   }
-
-  AddTask(title: string, date: any, project: number) {
+  Remove(task: Task) {
+    this.connectionAPI.removeObject('tasks/remove/' + task.id).subscribe(res => {
+    },
+      console.error
+    );
+    const taskIndex = this.tasks.indexOf(task);
+    if (taskIndex !== -1) {
+      this.tasks.splice(taskIndex, 1);
+    }
+  }
+  Edit(task: Task) {
+    this.connectionAPI.updateObjects('tasks/update', task).subscribe(res => {
+    },
+      console.error
+    );
+    this.QuePosiotnChange(task);
+  }
+  Add(title: string, date: any, project: number) {
     let queue = 0;
     if (date !== undefined) {
       if (this.tasks.length > 0) {
@@ -89,5 +107,5 @@ export class AddRemoveTask {
 
 }
 // tslint:disable-next-line:prefer-const
-let TM: AddRemoveTask;
+let TM: TaskManager;
 export default TM;

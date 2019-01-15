@@ -2,11 +2,11 @@
   <tr>
     <td class="td_done">
       <div style="margin-bottom:-9px">
-        <mat-checkbox [(ngModel)]="task.status" class="checkbox" color="warn" name="done" (click)="RemoveTask()"></mat-checkbox>
+        <mat-checkbox [(ngModel)]="task.status" class="checkbox" color="warn" name="done" (click)="sendRemoveRequest()"></mat-checkbox>
       </div>
     </td>
     <td class="td_title">
-      <input (change)="EditTask()" [(ngModel)]="task.title" class="titleIN" type="text">
+      <input (change)="sendEditRequest()" [(ngModel)]="task.title" class="titleIN" type="text">
     </td>
     <td class="td_icon">
       <button mat-icon-button (click)="HideShowElement(commentWindow);">
@@ -42,7 +42,7 @@
           <owl-date-time #dtMenu></owl-date-time>
         </button>
 
-        <button mat-menu-item (click)="RemoveTask()">
+        <button mat-menu-item (click)="sendRemoveRequest()">
           <mat-icon>delete</mat-icon>
           <span>Delete Task</span>
         </button>

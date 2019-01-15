@@ -1,7 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DBAPI } from '../DBAPI.service';
 import { Task } from '../to-do/task';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-task',
@@ -11,39 +9,31 @@ import { Subscription } from 'rxjs';
 export class TaskComponent {
 
   _task: Task;
-  @Input() set task(value: Task) {
-    this.taskChanged.emit(value);
-    this._task = value;
-  }
-  get task() {
-    return this._task;
-  }
-  @Output() taskChanged = new EventEmitter<Task>();
+  @Input() task: Task;
+  @Output() taskEdit = new EventEmitter<Task>();
+  @Output() taskRemove = new EventEmitter<Task>();
 
 
 
-  constructor(private connectionAPI: DBAPI) {
+  constructor() {
+  }
 
-  }
-  RemoveTask() {
-    this.connectionAPI.removeObject('tasks/remove/' + this.task.id).subscribe(res => { },
-      console.error
-    );
-  }
-  EditTask() {
-    this.connectionAPI.updateObjects('tasks/update', this.task).subscribe(res => {
-    },
-      console.error
-    );
-  }
   HideShowElement(el: any): void {
     const display = window.getComputedStyle(el).getPropertyValue('display');
     if (display !== 'none') { el.style.display = 'none'; } else { el.style.display = 'block'; }
   }
   ChangeTaskDate(date: HTMLInputElement) {
     this.task.date = new Date(date.value);
-    this.taskChanged.emit(this.task);
-    this.EditTask();
+    this.sendEditRequest();
+
+  }
+  sendEditRequest()
+  {
+    this.taskEdit.emit(this.task);
+  }
+  sendRemoveRequest()
+  {
+    this.taskRemove.emit(this.task);
   }
   GetDate(date): string {
     let dateString;

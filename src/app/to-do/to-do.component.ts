@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Task } from './task';
-import {AddRemoveTask} from './add-remove-task';
+import { TaskManager } from './add-remove-task';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DBAPI } from '../DBAPI.service';
 import { CommentsManager } from '../comments';
@@ -14,12 +14,12 @@ import { CommentsManager } from '../comments';
 // tslint:disable-next-line
 //https://danielykpan.github.io/date-time-picker/
 
-export class ToDoComponent  implements OnInit, OnDestroy {
+export class ToDoComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:quotemark
   TodayDate: Date;
   commentManager: CommentsManager;
   projects: string[];
-  TM: AddRemoveTask;
+  TM: TaskManager;
   lastTaskDate: Date = new Date();
   tasksSubscription: Subscription;
   constructor(private connectionAPI: DBAPI) {
@@ -32,16 +32,11 @@ export class ToDoComponent  implements OnInit, OnDestroy {
   }
   ngOnInit(): void {
     this.commentManager = new CommentsManager(this.connectionAPI);
-    this.TM =  new AddRemoveTask(this.connectionAPI);
+    this.TM = new TaskManager(this.connectionAPI);
   }
-
-  TaskUpdate(task)
-  {
-    this.TM.QuePosiotnChange(task);
-  }
-    // tslint:disable-next-line:max-line-length
+  // tslint:disable-next-line:max-line-length
   AddTaskButtonClick(title: HTMLInputElement, date: HTMLInputElement, project: HTMLInputElement, addTaskForm: any, thisButton: any): void {
-    this.TM.AddTask(title.value, new Date(date.value), parseInt(project.value, 10));
+    this.TM.Add(title.value, new Date(date.value), parseInt(project.value, 10));
     this.ResetInput(title, date, addTaskForm, thisButton);
   }
   ResetInput(title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any, thisButton: any): void {
@@ -72,23 +67,18 @@ export class ToDoComponent  implements OnInit, OnDestroy {
   }
   GetDate(dateArg): string {
     let dateString;
-    if (typeof dateArg === 'string' )
-    {
+    if (typeof dateArg === 'string') {
       dateString = dateArg;
-    }else
-    {
+    } else {
       dateString = dateArg.toISOString();
     }
     if (dateString.length > 50) {
-    dateString = dateString.substring(8, 18);
+      dateString = dateString.substring(8, 18);
     }
     const date = this.StringToDate(dateString.substring(0, 10));
     const today = this.StringToDate(new Date().toISOString().substring(0, 10));
     const DateInMilliseconds = Math.round(date.getTime() / (1000 * 60 * 60 * 24));
-
-    // tslint:disable-next-line:no-bitwise
     const TodayDateInMilliseconds = Math.round(today.getTime() / (1000 * 60 * 60 * 24));
-    // tslint:disable-next-line:no-bitwise
     const Difference = (DateInMilliseconds - TodayDateInMilliseconds);
     if (Difference === 0) {
       return 'Today';

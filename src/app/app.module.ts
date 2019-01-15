@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ToDoComponent } from './to-do/to-do.component';
-import {AddRemoveTask} from './to-do/add-remove-task';
+import {TaskManager} from './to-do/add-remove-task';
 import { RutineComponent } from './rutine/rutine.component';
 import { GoalsComponent } from './goals/goals.component';
 import { BodyComponent } from './body/body.component';
@@ -57,7 +57,7 @@ const appRoutes: Routes = [
     MatInputModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true})
   ],
-  providers: [DBAPI, AddRemoveTask, {provide: APP_BASE_HREF, useValue : './' }],
+  providers: [DBAPI, TaskManager, {provide: APP_BASE_HREF, useValue : './' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 <main>
   <div *ngFor="let task of TM.tasks;let index=index" class="task">
     <h3 *ngIf="CanDisplayDate(task)">{{ GetDate(task.date) }}</h3>
-    <app-task [task]="task" (taskChanged)="TaskUpdate($event)"></app-task>
+    <app-task [task]="task" (taskEdit)="TM.Edit($event)" (taskRemove)=TM.Remove($event)></app-task>
   </div>
 
   <div #addTaskForm class="addTask">
@@ -23,7 +23,6 @@
     </table>
     <table>
       <tr>
-
         <td class="ADDtd_date">
           <input [owlDateTimeTrigger]="dtAdd" [ngModel]="TodayDate" #dateFieldAdd [owlDateTime]="dtAdd">
           <owl-date-time #dtAdd></owl-date-time>

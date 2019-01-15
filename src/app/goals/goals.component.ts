@@ -1,6 +1,6 @@
 import { Component, OnInit, SimpleChange, OnDestroy } from '@angular/core';
 import { AddRemoveGoals } from './add-remove-goals';
-import { AddRemoveTask } from '../to-do/add-remove-task';
+import { TaskManager } from '../to-do/add-remove-task';
 import { DBAPI } from '../DBAPI.service';
 import {Goal} from './goal';
 import { from, Subscription } from 'rxjs';

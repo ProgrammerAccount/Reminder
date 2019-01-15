@@ -3,7 +3,6 @@ import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import {HttpErrorResponse, HttpClient, HttpHeaders} from '@angular/common/http';
 
-import { Task } from './to-do/task';
 const API_URL = 'http://localhost:5000';
 @Injectable()
 

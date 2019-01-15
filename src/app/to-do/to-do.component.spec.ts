@@ -11,7 +11,7 @@ import { NavbarComponent } from '../navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { APP_BASE_HREF } from '@angular/common';
-import { AddRemoveTask } from './add-remove-task';
+import { TaskManager } from './add-remove-task';
 import { Task } from './task';
 
 describe('ToDoComponent', () => {
@@ -52,7 +52,7 @@ describe('ToDoComponent', () => {
     fixture = TestBed.createComponent(ToDoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    component.tasksManager =  new AddRemoveTask(new Array<Task[]>(), new Array<string>());
+    component.tasksManager =  new TaskManager(new Array<Task[]>(), new Array<string>());
   });
   afterEach(() => {
     localStorage.removeItem('tasks');
