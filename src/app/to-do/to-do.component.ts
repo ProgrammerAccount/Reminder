@@ -38,7 +38,6 @@ export class ToDoComponent  implements OnInit, OnDestroy {
   TaskUpdate(task)
   {
     this.TM.QuePosiotnChange(task);
-
   }
 
     // tslint:disable-next-line:max-line-length

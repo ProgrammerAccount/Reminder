@@ -73,19 +73,17 @@ export class AddRemoveTask {
   }
 
   sortTaskByDate(task: Task[]): void {
-    this.tasks = this.tasks.sort((a, b) => {
+    task.sort((a, b) => {
       const x = new Date(a.date);
       const y = new Date(b.date);
-      console.log(x.getTime());
-      console.log(y.getTime());
-      console.log(x.getTime() - y.getTime());
-
       return x.getTime() - y.getTime();
     });
   }
   QuePosiotnChange(task: Task) { // check that tasks have unique id
+    console.log('array should be sorted afted this operation');
     this.sortTaskByQueue(this.tasks);
     this.sortTaskByDate(this.tasks);
+    console.log(this.tasks);
     let foundSameQueue = false;
     let lastQueueValue = parseInt(task.queue.toString(), 10) + 1;
     this.tasks.forEach(el => {
@@ -105,6 +103,7 @@ export class AddRemoveTask {
     this.sortTaskByQueue(this.tasks);
     this.sortTaskByDate(this.tasks);
     console.log(this.tasks);
+
   }
 
 }
