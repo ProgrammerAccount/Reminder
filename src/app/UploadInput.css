@@ -1,4 +1,11 @@
-
+.addTask > table{
+  width: 100%;
+}
+.addTask > table tr td
+{
+  margin: 0;
+  padding: 0;
+}
 .ADDtd_title
 {
   width:85%;

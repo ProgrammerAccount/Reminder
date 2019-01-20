@@ -24,11 +24,6 @@ export class GoalsComponent implements OnInit, OnDestroy {
 
   }
   // tslint:disable-next-line:max-line-length
-  AddTaskButtonClick(title: HTMLInputElement, date: HTMLInputElement, description: HTMLInputElement, project: HTMLInputElement, addTaskForm: any, thisButton: any) {
-    // this.TM.AddTask(title.value,  date.value, parseInt(project.value, 10));
-    this.ResetInputStep(title, date, description, addTaskForm, thisButton);
-
-  }
   btnAnimation(btn) {
     btn = btn._elementRef.nativeElement;
     if (btn.classList.contains('ShowStepBtn')) {
@@ -68,7 +63,16 @@ export class GoalsComponent implements OnInit, OnDestroy {
     description.value = '';
 
   }
-
+  AddTaskButtonClick(goal: Goal,title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any, thisButton: any): void {
+    goal.stepsManager.Add(title.value, new Date(date.value), goal.id);
+    this.ResetInput(title, date, addTaskForm, thisButton);
+  }
+  ResetInput(title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any, thisButton: any): void {
+    addTaskForm.style.display = 'none';
+    this.HideShowElement(thisButton);
+    title.value = '';
+    date.value = this.TodayDate;
+  }
   RemoveGoal(goal: Goal) {
     this.goalsManager.RemoveGoal(goal);
   }
@@ -78,10 +82,6 @@ export class GoalsComponent implements OnInit, OnDestroy {
   }
   // tslint:disable-next-line:use-life-cycle-interface
   ngDoCheck() {
-  }
-  ShowForm(addTaskForm: any, thisButton: any): void {
-    this.HideShowElement(addTaskForm);
-    this.HideShowElement(thisButton);
   }
   ResetStepAddInputs(biggestQueue: number, title: HTMLInputElement, queue: HTMLInputElement, description: HTMLInputElement) {
     title.value = '';

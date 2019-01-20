@@ -14,7 +14,7 @@ export class AddRemoveGoals {
             console.error);
     }
     AddGoal(title: string) {
-        this.connectionAPI.addObjects('projects/add', title).subscribe(res => {
+        this.connectionAPI.addObjects('projects/add', new Goal(title , 1)).subscribe(res => {
             this.goals.push(res);
         }, console.error);
     }

@@ -19,9 +19,43 @@
       </tr>
     </table>
     <div #stepsContainer class="stepsContainer">
-      <div *ngFor="let task of goal.stepsManager.tasks">
+      <div *ngFor="let task of goal.stepsManager?.tasks">
         <app-task [(task)]="task" (taskEdit)="goal.stepsManager.Edit($event)" (taskRemove)=goal.stepsManager.Remove($event)></app-task>
       </div>
+      <div #addTaskForm class="addTask">
+        <table>
+          <tr>
+            <td class="ADDtd_title">
+              <input #title placeholder="Title" id="title" type="text" id="title">
+            </td>
+
+          </tr>
+        </table>
+        <table>
+          <tr>
+              <td class="ADDtd_date">
+                  <input [owlDateTimeTrigger]="dtAdd" [ngModel]="TodayDate" #dateFieldAdd [owlDateTime]="dtAdd">
+                  <owl-date-time #dtAdd></owl-date-time>
+                </td>
+              <td class="ADDtd_emptySpace"></td>
+            <td>
+              <button id="btnCancelAddTask" (click)="ResetInput(title,dateFieldAdd,addTaskForm,showForm)">
+                Cancel
+              </button>
+            </td>
+            <td class="ADDtd_SubmitButton">
+
+              <button id="btnSubmitAddTask" (click)="AddTaskButtonClick(goal,title,dateFieldAdd,project,addTaskForm,showForm)">
+                Add Task
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+
+      <button #showForm (click)=" HideShowElement(showForm); HideShowElement(addTaskForm)" class="AddTaskButton">+ Add
+        Task</button>
     </div>
   </div>
   <div #addTaskForm class="addTask">
