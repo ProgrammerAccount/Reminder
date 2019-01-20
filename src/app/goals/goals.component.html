@@ -12,18 +12,26 @@
         </td>
 
         <td class="td_icon">
-          <button mat-icon-button (click)="HideShowElement(stepsContainer)">
-            <mat-icon>keyboard_arrow_down</mat-icon>
+          <button #StepBtn mat-icon-button class="ShowStepBtn StepBtn" (click)="HideShowElement(stepsContainer); btnAnimation(StepBtn); stepsManagerInit(goal)">
+            <mat-icon> expand_more</mat-icon>
           </button>
         </td>
       </tr>
     </table>
     <div #stepsContainer class="stepsContainer">
-     <div *ngFor="let task of tasks">
-       <app-task [(task)]="task"></app-task>
-     </div>
+      <div *ngFor="let task of goal.stepsManager.tasks">
+        <app-task [(task)]="task" (taskEdit)="goal.stepsManager.Edit($event)" (taskRemove)=goal.stepsManager.Remove($event)></app-task>
+      </div>
     </div>
   </div>
+  <div #addTaskForm class="addTask">
+    <input #title class="title" type="text" id="title">
+
+    <button (click)="AddGoalButtonClick(title,description,addTaskForm,showForm)"> Add Goal</button>
+
+  </div>
+  <button #showForm (click)="HideShowElement(addTaskForm); HideShowElement(showForm)" class="AddGoalButton">+ Add Goal</button>
+
 </main>
 
 <!-- <div class="container">

@@ -9,6 +9,29 @@
     display: inline-block;
     vertical-align: top;
 }
+.StepBtn
+{
+    font-size: 24px;
+    -webkit-transition-duration: 300ms;
+    -moz-transition-duration: 300ms;
+    -o-transition-duration: 300ms;
+    transition-duration: 300ms;
+
+  outline: 0;
+}
+.ShowStepBtn
+{
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+      transform: rotate(0deg);
+
+}
+.HideStepBtn
+ {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+      transform: rotate(180deg);
+}
 body{
     margin:0;
     padding: 0;

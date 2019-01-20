@@ -99,7 +99,6 @@ export class ToDoComponent implements OnInit, OnDestroy {
   }
 
   HideShowElement(el: any): void {
-
     const display = window.getComputedStyle(el).getPropertyValue('display');
     if (display !== 'none') { el.style.display = 'none'; } else { el.style.display = 'block'; }
   }

@@ -6,18 +6,18 @@ export class AddRemoveGoals {
     goals: Goal[];
     goalSubscrion: Subscription;
     TodayDate: string;
-    constructor(connectionAPI: DBAPI)
-    {
-        this.goalSubscrion = connectionAPI.getObjects('projects').subscribe(res => {
+    constructor(private connectionAPI: DBAPI) {
+        this.goalSubscrion = this.connectionAPI.getObjects('projects').subscribe(res => {
             this.goals = res;
             console.log(res);
         },
-        console.error);
+            console.error);
     }
-    AddGoal(title: string, description: string) {
-
-        this.goals.push(new Goal(title, description));
-      }
+    AddGoal(title: string) {
+        this.connectionAPI.addObjects('projects/add', title).subscribe(res => {
+            this.goals.push(res);
+        }, console.error);
+    }
     RemoveGoal(goal: Goal) {
         this.goals.splice(this.goals.indexOf(goal), 1);
     }
