@@ -14,11 +14,14 @@ export class AddRemoveGoals {
             console.error);
     }
     AddGoal(title: string) {
-        this.connectionAPI.addObjects('projects/add', new Goal(title , 1)).subscribe(res => {
+        this.connectionAPI.addObjects('projects/add', new Goal(title, 1)).subscribe(res => {
             this.goals.push(res);
         }, console.error);
     }
     RemoveGoal(goal: Goal) {
+        this.connectionAPI.removeObject('projects/remove/' + goal.id).subscribe(res => {
+
+        }, console.error);
         this.goals.splice(this.goals.indexOf(goal), 1);
     }
 

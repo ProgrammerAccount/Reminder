@@ -9,6 +9,10 @@
           <button mat-icon-button>
             <mat-icon>comment</mat-icon>
           </button>
+        <td class="td_icon" (click)= "RemoveGoal(goal)">
+          <button mat-icon-button>
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
 
         <td class="td_icon">
@@ -33,11 +37,11 @@
         </table>
         <table>
           <tr>
-              <td class="ADDtd_date">
-                  <input [owlDateTimeTrigger]="dtAdd" [ngModel]="TodayDate" #dateFieldAdd [owlDateTime]="dtAdd">
-                  <owl-date-time #dtAdd></owl-date-time>
-                </td>
-              <td class="ADDtd_emptySpace"></td>
+            <td class="ADDtd_date">
+              <input [owlDateTimeTrigger]="dtAdd" [ngModel]="TodayDate" #dateFieldAdd [owlDateTime]="dtAdd">
+              <owl-date-time #dtAdd></owl-date-time>
+            </td>
+            <td class="ADDtd_emptySpace"></td>
             <td>
               <button id="btnCancelAddTask" (click)="ResetInput(title,dateFieldAdd,addTaskForm,showForm)">
                 Cancel
@@ -61,103 +65,9 @@
   <div #addTaskForm class="addTask">
     <input #title class="title" type="text" id="title">
 
-    <button (click)="AddGoalButtonClick(title,description,addTaskForm,showForm)"> Add Goal</button>
+    <button (click)="AddGoalButtonClick(title);HideShowElement(addTaskForm); HideShowElement(showForm)"> Add Goal</button>
 
   </div>
   <button #showForm (click)="HideShowElement(addTaskForm); HideShowElement(showForm)" class="AddGoalButton">+ Add Goal</button>
 
 </main>
-
-<!-- <div class="container">
-    <div *ngFor="let goal of goalsManager.goals" class="task">
-
-      <input [(ngModel)]="goal.title" class="Goaltitle" type="text" name="title">
-      <button (click)="HideShowElement(OptionsForm)" type="submit" class="show"><img src="./assets/img/baseline_expand_more_black_18dp.png"></button>
-      <div class="OptionsForm" #OptionsForm>
-        <button class="btnRemove" width="50" height="50" (click)="RemoveGoal(goal)">X</button>
-        <div *ngFor="let task of TM.tasks" [hidden]='task.project != goal.title' class="task">
-
-          <table>
-            <tr>
-              <td class="td_done">
-                <input [(ngModel)]="task.done" class="checkbox" type="checkbox" name="done" (click)="RemoveTask(task)" /></td>
-              <td class="td_title"> <input [(ngModel)]="task.title" class="title" type="text"></td>
-              <td class="td_iconComment"><i class="icon-comment" (click)="ShowHiddenCommentWindow(i)"></i></td>
-              <div class="commentWindow">
-                <div class="CommentWindowCloseBtn" (click)="ShowHiddenCommentWindow(i)"><i class="icon-cancel"></i></div>
-                <table>
-                  <tr>
-                    <td class="td_title"> <input [(ngModel)]="task.title" class="title" type="text"></td>
-                    <td class="td_date"><input #dateFieldInComment [ngModel]="task.date" [min]="TodayDate" class="date  d-none d-md-block"
-                        type="date" (change)="DateChange(task,dateFieldInComment)" />
-                    </td>
-                    <td class="td_iconMenu">
-                      <div class="icon icon-menu"></div>
-
-                    </td>
-                </table>
-                <ul>
-                  <li *ngFor="let commen of task.comments; let index = index">
-                    <input class="comment" [value]="commen" id="{{index}}" (focusout)="CommentChange($event.target , task ,index)">
-                    <div class="icon-trash-empty trashIcon" (click)="RemoveComment(task,index)"></div>
-                  </li>
-                  <li>
-                    <input #com id="ADDComment" type="text"> <input type="button" id="AddCommentBtn" value="Add"
-                      (click)="AddComment(com,task); ResteCommentInput(com)">
-                  </li>
-                </ul>
-
-              </div>
-              <td class="td_date"><input #dateField [ngModel]="task.date" [min]="TodayDate" class="date  d-none d-md-block"
-                  type="date" (change)="DateChange(task,dateField)" />
-              </td>
-              <td class="td_queue"><input [(ngModel)]="task.queue" [ngModelOptions]="{updateOn: 'blur'}" class="queue d-none d-md-block"
-                  (focusout)="QuePosiotnChange(task)"></td>
-
-              <td class="td_iconMenu">
-                <div class="icon icon-menu"></div>
-                <div class="menu">
-                  <table>
-
-                    <tr>
-                      <input #dateFieldInMenu [ngModel]="task.date" [min]="TodayDate" class="date  d-block d-md-none"
-                        type="date" (change)="DateChange(task,dateFieldInMenu)" />
-                    </tr>
-                    <tr>
-                      <input [(ngModel)]="task.queue" [ngModelOptions]="{updateOn: 'blur'}" class="queue d-block d-md-none"
-                        (focusout)="QuePosiotnChange(task)">
-                    </tr>
-                    <tr>
-                      <div style="text-algin:center" (click)="RemoveTask(task)">Delete Task <i class="icon-trash-empty"></i>
-                      </div>
-                    </tr>
-
-                  </table>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div #addTaskForm>
-            <input #title placeholder="title" class="title" type="text" id="title">
-    
-            <input [value]="TodayDate" [min]="TodayDate" #date type="date" id="date" />
-            <textarea #description class="AddDescription" id="ADDdescription"></textarea>
-            <input #project type="hidden" [value]="goal.title" />
-            <button (click)="AddTaskButtonClick(title,date,description,project,addTaskForm,showForm)"> Add Task</button>
-    
-    
-          </div>
-      </div>
-
-
-    </div>
-  <div #addTaskForm class="addTask">
-    <input #title class="title" type="text" id="title">
-
-    <textarea #description class="AddDescription" id="description"></textarea>
-    <button (click)="AddGoalButtonClick(title,description,addTaskForm,showForm)"> Add Goal</button>
-
-  </div>
-  <button #showForm (click)="ShowForm(addTaskForm,showForm)" class="AddGoalButton">+ Add Goal</button>
-</div>-->

@@ -96,7 +96,7 @@ input[type="data"]
 }
 
 .AddGoalButton{
-    margin: 0 0 0 40px;
+    margin: 0;
     padding: 12px;
     background:#f44242;
     border:none;

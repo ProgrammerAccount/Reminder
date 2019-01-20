@@ -50,20 +50,17 @@ export class GoalsComponent implements OnInit, OnDestroy {
     }
   }
   // tslint:disable-next-line:max-line-length
-  AddGoalButtonClick(title: HTMLInputElement, description: HTMLInputElement, addTaskForm: any, thisButton: any) {
+  AddGoalButtonClick(title: HTMLInputElement) {
     this.goalsManager.AddGoal(title.value);
-    this.ResetInputGoal(title, description, addTaskForm, thisButton);
+    this.ResetInputGoal(title);
 
   }
   // tslint:disable-next-line:max-line-length
-  ResetInputGoal(title: HTMLInputElement, description: HTMLInputElement, addTaskForm: any, thisButton: any) {
-    addTaskForm.style.display = 'none';
-    thisButton.style.display = 'inline';
+  ResetInputGoal(title: HTMLInputElement) {
     title.value = '';
-    description.value = '';
 
   }
-  AddTaskButtonClick(goal: Goal,title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any, thisButton: any): void {
+  AddTaskButtonClick(goal: Goal, title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any, thisButton: any): void {
     goal.stepsManager.Add(title.value, new Date(date.value), goal.id);
     this.ResetInput(title, date, addTaskForm, thisButton);
   }
@@ -83,12 +80,6 @@ export class GoalsComponent implements OnInit, OnDestroy {
   // tslint:disable-next-line:use-life-cycle-interface
   ngDoCheck() {
   }
-  ResetStepAddInputs(biggestQueue: number, title: HTMLInputElement, queue: HTMLInputElement, description: HTMLInputElement) {
-    title.value = '';
-    queue.value = (biggestQueue + 1).toString();
-    description.value = '';
-  }
-
 
   DateToStringYYYYMMDD(date: Date): string {
     return date.toISOString().substring(0, 10);
