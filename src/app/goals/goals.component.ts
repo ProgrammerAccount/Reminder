@@ -46,7 +46,8 @@ export class GoalsComponent implements OnInit, OnDestroy {
 
   stepsManagerInit(goal: Goal) {
     if (goal.stepsManager === undefined) {
-      goal.stepsManager = new TaskManager(this.connectionAPI, goal.id);
+      goal.stepsManager = new TaskManager(this.connectionAPI);
+      goal.stepsManager.GetTasks(goal.id);
     }
   }
   // tslint:disable-next-line:max-line-length
@@ -60,13 +61,12 @@ export class GoalsComponent implements OnInit, OnDestroy {
     title.value = '';
 
   }
-  AddTaskButtonClick(goal: Goal, title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any, thisButton: any): void {
+  AddTaskButtonClick(goal: Goal, title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any): void {
     goal.stepsManager.Add(title.value, new Date(date.value), goal.id);
-    this.ResetInput(title, date, addTaskForm, thisButton);
+    this.ResetInput(title, date, addTaskForm);
   }
-  ResetInput(title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any, thisButton: any): void {
+  ResetInput(title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any): void {
     addTaskForm.style.display = 'none';
-    this.HideShowElement(thisButton);
     title.value = '';
     date.value = this.TodayDate;
   }

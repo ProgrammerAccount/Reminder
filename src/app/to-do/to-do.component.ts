@@ -4,6 +4,7 @@ import { TaskManager } from './add-remove-task';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { DBAPI } from '../DBAPI.service';
 import { CommentsManager } from '../comments';
+import { TmplAstBoundAttribute } from '@angular/compiler';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class ToDoComponent implements OnInit, OnDestroy {
   constructor(private connectionAPI: DBAPI) {
     this.TodayDate = new Date();
 
+
   }
 
   ngOnDestroy(): void {
@@ -33,6 +35,7 @@ export class ToDoComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.commentManager = new CommentsManager(this.connectionAPI);
     this.TM = new TaskManager(this.connectionAPI);
+    this.TM.GetTasks();
   }
   // tslint:disable-next-line:max-line-length
   AddTaskButtonClick(title: HTMLInputElement, date: HTMLInputElement, project: HTMLInputElement, addTaskForm: any, thisButton: any): void {

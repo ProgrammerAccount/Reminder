@@ -7,13 +7,12 @@ import { Injectable } from '@angular/core';
 export class TaskManager {
   tasks: Task[];
 
-  constructor(private connectionAPI: DBAPI, id_project: number = 0) {
+  constructor(private connectionAPI: DBAPI) {
     if (this.tasks === undefined) {
       this.tasks = new Array();
     }
-    this.GetTasks(id_project);
   }
-  GetTasks(id_project) {
+  GetTasks(id_project = 0) {
     let TaskURL = 'tasks';
     if (id_project !== 0) {
       TaskURL = TaskURL + '/' + id_project;
@@ -107,5 +106,3 @@ export class TaskManager {
 
 }
 // tslint:disable-next-line:prefer-const
-let TM: TaskManager;
-export default TM;

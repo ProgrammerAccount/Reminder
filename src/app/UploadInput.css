@@ -44,12 +44,15 @@
 
 .addTask {
   width: 100%;
-  display: none;
   height: 60px;
   padding: 0;
-  margin-bottom: 100px;
+  margin-bottom: 30px;
 }
+.NotDisplay
+{
+  display: none;
 
+}
 .AddTaskButton {
   margin: 0 0 0 0px;
   padding: 9px;

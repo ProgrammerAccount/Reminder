@@ -6,9 +6,16 @@
           <input class="goalTitle" [(ngModel)]="goal.title">
         </td>
         <td class="td_icon">
-          <button mat-icon-button>
+          <button mat-icon-button (click)="HideShowElement(commentWindow)">
             <mat-icon>comment</mat-icon>
           </button>
+          <div #commentWindow style="display: none">
+            <app-comment [(object)]="goal">
+              <button (click)="HideShowElement(commentWindow)" mat-icon-button>
+                <mat-icon>close</mat-icon>
+              </button>
+            </app-comment>
+          </div>
         <td class="td_icon" (click)= "RemoveGoal(goal)">
           <button mat-icon-button>
             <mat-icon>delete</mat-icon>
@@ -49,20 +56,16 @@
             </td>
             <td class="ADDtd_SubmitButton">
 
-              <button id="btnSubmitAddTask" (click)="AddTaskButtonClick(goal,title,dateFieldAdd,project,addTaskForm,showForm)">
+              <button id="btnSubmitAddTask" (click)="AddTaskButtonClick(goal,title,dateFieldAdd,project,addTaskForm)">
                 Add Task
               </button>
             </td>
           </tr>
         </table>
       </div>
-
-
-      <button #showForm (click)=" HideShowElement(showForm); HideShowElement(addTaskForm)" class="AddTaskButton">+ Add
-        Task</button>
     </div>
   </div>
-  <div #addTaskForm class="addTask">
+  <div #addTaskForm class="addTask NotDisplay">
     <input #title class="title" type="text" id="title">
 
     <button (click)="AddGoalButtonClick(title);HideShowElement(addTaskForm); HideShowElement(showForm)"> Add Goal</button>

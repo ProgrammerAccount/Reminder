@@ -18,6 +18,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatMenuModule, MatIconModule, MatButtonModule, MatInputModule, MatSelectModule, MatCheckboxModule} from '@angular/material';
 import { TaskComponent } from './task/task.component';
 import { CommentComponent } from './comment/comment.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 
 
@@ -55,7 +57,8 @@ const appRoutes: Routes = [
     MatSelectModule,
     MatCheckboxModule,
     MatInputModule,
-    RouterModule.forRoot(appRoutes, { enableTracing: true})
+    RouterModule.forRoot(appRoutes, { enableTracing: true}),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [DBAPI, TaskManager, {provide: APP_BASE_HREF, useValue : './' }],
   bootstrap: [AppComponent]

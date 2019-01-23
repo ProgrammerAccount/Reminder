@@ -6,13 +6,9 @@
 
   <ul>
     <li *ngFor="let comment of comments; let index = index">
-<<<<<<< HEAD
       <input class="commentIN" [(ngModel)]="comment.value" id="{{index}}" (focusout)="EditComment(comment)">
-=======
-      <input class="commentIN" [(ngModel)]="comment.value" id="{{index}}" (focusout)="CommentChange(comment , object)">
->>>>>>> 559f6e283c84ed21c86d0387d91b465b0655a58f
       <button class="trashIcon" mat-icon-button (click)="RemoveComment(comment);">
-          <mat-icon>delete</mat-icon>
+        <mat-icon>delete</mat-icon>
 
       </button>
     </li>
