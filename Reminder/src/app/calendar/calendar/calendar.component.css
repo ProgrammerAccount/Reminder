@@ -1,0 +1,87 @@
+body {}
+
+header {
+    background-color: #6016B4 !important;
+    color: white;
+    margin: auto;
+    text-align: center;
+    padding: 50px;
+    font-size: 23px;
+}
+
+.content {
+    margin: auto;
+    text-align: center;
+}
+
+.monthAndYear>.content {
+    width: 240px;
+}
+
+.monthAndYear {
+    display: flex;
+    margin: auto;
+    text-align: center;
+    font-size: 23px;
+    height: 23px;
+    width: 280px;
+    margin-bottom: 20px;
+}
+
+tr,
+table {
+    width: 100%;
+}
+
+th {
+    text-transform: uppercase;
+    width: 25px;
+    margin: 15px;
+    font-weight: 400;
+}
+
+.eventList {
+    list-style-type: none;
+}
+
+.container {
+    background-color: #6016B4 !important;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+}
+
+.addButton {
+    background-color: #7C30EF;
+    border: none;
+    height: 65px;
+    width: 65px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 65px;
+    border-radius: 32.5px;
+    font-size: 48px;
+    color: #7B7B7B;
+    display: block;
+    margin: auto;
+    margin-top: 45px;
+    margin-bottom: 109px;
+}
+
+.addEvent
+{
+    margin-top: 71px;
+}
+.addEvent>.content {
+    margin-top: 71px;
+}
+.title {
+    border: none;
+    font-size: 18px;
+    height: 40px;
+    padding: 6px;
+    border-radius: 20px;
+    flex-grow: 2;
+    width: 70%;
+    box-sizing: border-box;
+}

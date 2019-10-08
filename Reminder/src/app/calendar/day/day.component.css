@@ -1,0 +1,9 @@
+.day {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 32px;
+    font-size: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+}

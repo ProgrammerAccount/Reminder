@@ -1,0 +1,38 @@
+<div class="container" [@remove]=stateRemove *ngIf="task">
+    <mat-checkbox [(ngModel)]="task.status" class="checkbox" color="warn" name="done" (click)="sendRemoveRequest()">
+    </mat-checkbox>
+    <input (change)="sendEditRequest()" [(ngModel)]="task.title" class="title" type="text">
+    <!--<div class="td_icon">
+        <button mat-icon-button (click)="HideShowElement(commentWindow);">
+      <mat-icon>comment</mat-icon>
+    </button>
+    </div>
+    <div #commentWindow style="display: none">
+        <app-comment [(object)]="task">
+            <button (click)="HideShowElement(commentWindow)" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+        </app-comment>
+    </div>-->
+    <app-timer-widget class="SubTimer" [taskID]="task.id" [taskTitle]="task.title"></app-timer-widget>
+    <div class="icon">
+        <button class="icon" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon class="icon">more_vert</mat-icon>
+    </button>
+        <mat-menu #menu="matMenu">
+            <button [owlDateTimeTrigger]="dtMenu" mat-menu-item> <i class="icon-calendar"></i>
+        <span>{{ GetDate(task.date) }}</span>
+        <input #date type="owlDateTime" [owlDateTime]="dtMenu" (ngModelChange)="ChangeTaskDate(date)"
+          [(value)]="task.date" [(ngModel)]="task.date" style="visibility: hidden;">
+        <owl-date-time #dtMenu></owl-date-time>
+      </button>
+            <app-timer-widget class="MenuSubTimer" [taskID]="task.id" [taskTitle]="task.title"></app-timer-widget>
+
+
+            <button mat-menu-item (click)="sendRemoveRequest()">
+        <mat-icon>delete</mat-icon>
+        <span>Delete Task</span>
+      </button>
+        </mat-menu>
+    </div>
+</div>

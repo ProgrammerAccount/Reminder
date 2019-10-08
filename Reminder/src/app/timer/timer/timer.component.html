@@ -1,0 +1,12 @@
+<div  class="container" *ngIf="subTimer">
+    <div class="title">{{ subTimer.taskTitle }}</div>
+  <div class="time">
+    <input #StopDate type="owlDateTime" [owlDateTime]="StartDate" [owlDateTimeTrigger]="StartDate" [(ngModel)]="start"
+      (ngModelChange)="StartDataChange()">
+    <owl-date-time  #StartDate></owl-date-time>
+  
+    <input #StopDate type="owlDateTime" [min]="start" [owlDateTime]="StopDate" [owlDateTimeTrigger]="StopDate" [(ngModel)]="stop"
+      (ngModelChange)="StopDataChange()">
+    <owl-date-time #StopDate></owl-date-time>
+  </div>
+  </div>

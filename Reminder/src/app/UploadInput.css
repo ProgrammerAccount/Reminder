@@ -1,0 +1,115 @@
+.addTask {
+  width: 100%;
+  display: flex;
+}
+.addTask *
+{
+  margin: 0;
+  padding: 0;
+}
+.ADDtd_title
+{
+
+}
+.ADDtd_project
+{
+  flex-grow: 1;
+}
+.ADDtd_priority{
+  width: 5%;
+}
+.ADDtd_date{
+  width: 25%;
+}
+.ADDtd_SubmitButton{
+  width: 20%;
+}
+#date{
+  width: 100%;
+  font-size: 13px;
+}
+#btnSubmitAddTask {
+  position: relative;
+  height: auto;
+  padding: 7px;
+  background: #f44242;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  bottom: 2px;
+
+}
+.TitleProjectContainer{
+  display: flex;
+}
+.addTask {
+  width: 100%;
+  height: 60px;
+  padding: 0;
+  margin-bottom: 30px;
+}
+.NotDisplay
+{
+  display: none;
+
+}
+.AddTaskButton {
+  margin: 0 0 0 0px;
+  padding: 9px;
+  background: #f44242;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  box-sizing: border-box;
+  cursor: pointer;
+
+}
+
+#project {
+  position: relative;
+  height: 35px;
+  bottom: 2px;
+  box-sizing: border-box;
+
+}
+
+#title {
+  padding: 5px;
+  border-radius: 3px;
+  height: 35px;
+  flex-grow: 4;
+  box-sizing: border-box;
+}
+#project {
+  padding: 2px;
+  margin-top: 4px;
+  font-size: 13px;
+  flex-grow: 1;
+  max-width: 25%;
+}
+#btnCancelAddTask {
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  align-self: flex-end;
+  flex-grow: 1;
+
+}
+.dateButtonContainer{
+  display: flex;
+}
+.emptySpace{
+  flex-grow: 4;
+
+}
+.date{
+  flex-grow: 3;
+  max-width: 30%;
+
+}
+
+#btnSubmitAddTask {
+  cursor: pointer;
+  align-self: flex-end;
+flex-grow:2;
+}

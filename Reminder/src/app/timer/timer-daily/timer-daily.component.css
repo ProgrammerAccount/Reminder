@@ -1,0 +1,56 @@
+.timer {
+    max-width: 700px;
+    width: 100%;
+    margin: auto;
+    box-shadow: rgb(232, 232, 232) 0px -2px 0px 0px inset;
+    transition: background-color 500ms ease;
+  
+}
+#myChart{
+    display: none;
+}
+.timer:hover {
+    background-color: rgba(232, 232, 232, 0.226);
+}
+
+.dataContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dataContainer div {
+    padding: 5px 10px 5px 10px;
+}
+.ShowChart {
+    height: 350px !important;
+}
+
+.ShowChartBtn {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+
+.HideChartBtn {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.ChartBtn {
+    font-size: 24px;
+    -webkit-transition-duration: 300ms;
+    -moz-transition-duration: 300ms;
+    -o-transition-duration: 300ms;
+    transition-duration: 300ms;
+}
+
+.Chart {
+    position: relative;
+    width: 70%;
+    max-width: 350px;
+    margin: auto;
+    height: 0px;
+    transition: all 1s ease;
+}

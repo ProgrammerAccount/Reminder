@@ -1,0 +1,24 @@
+<div #Timer class="timer">
+    <div class="dataContainer">
+      <div class="date">{{ date }}</div>
+      <div class="time">{{ formatTime(countTimer(subTimers)) }}</div>
+      <div class="subTimer">
+      </div>
+      <div class="arrow">
+        <button #ChartBtn mat-icon-button class="ShowChartBtn ChartBtn"
+          (click)="btnAnimation(ChartBtn); ChartInit(Chart); ShowHide(ChartContainer,Timer)">
+          <mat-icon> expand_more</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div #ChartContainer class="Chart">
+      <canvas #Chart id="myChart" width="350" height="350"></canvas>
+    </div>
+    <div *ngIf="ChartOpen">
+      <!--Loading subTimers to one day after click ChartBtn-->
+      <span *ngFor="let subTimer of subTimers">
+        <app-timer [subTimer]=subTimer></app-timer>
+      </span>
+    </div>
+  
+  </div>

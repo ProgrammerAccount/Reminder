@@ -1,0 +1,56 @@
+<header>
+    <h3>Calendar</h3>
+</header>
+<!-- new menu component-->
+
+<div class="container">
+
+    <div class="monthAndYear">
+
+        <div class="arrow forwardMonth" (click)="ChangeMonth(DisplayMonth-1)"><img
+                src="../assets/icons/ic_chevron_left.svg"></div>
+        <div class="content">{{DateString}}</div>
+        <div class="arrow nextMonth" (click)="ChangeMonth(DisplayMonth+1)"><img
+                src="../assets/icons/ic_chevron_right.svg"></div>
+    </div>
+
+    <table *ngIf="calendarServ.objects !== undefined">
+        <tr>
+            <th>Mon</th>
+            <th>Tue</th>
+            <th>Wed</th>
+            <th>Thu</th>
+            <th>Fri</th>
+            <th>Sat</th>
+            <th>Sun</th>
+        </tr>
+        <tr *ngFor="let week of month ">
+            <td *ngFor="let day of week ">
+                <app-day #dayObject (click)="SelectDay(dayObject) " [event]="day?.event " [date]="day.date "></app-day>
+            </td>
+        </tr>
+    </table>
+
+    <ul class="eventList ">
+        <li *ngFor="let event of calendarServ.objects " class="event "> {{event.title}}</li>
+    </ul>
+    <div *ngIf="selectedDay != null">
+        <div class="addEvent " ng-init="addFromShow=false">
+            <div *ngIf="!addFromShow" class="addBtnForm">
+                <div *ngIf="calendarServ.objects == []" class="content ">No events for this month</div>
+                <button (click)="addFromShow = true" class="addButton ">+</button>
+            </div>
+            <div *ngIf="addFromShow" class="addBtnForm">
+                <input placeholder="Title" class="title" #title type="text" />
+                <input #time type="time" />
+                <button (click)="AddEvent(title,time); ResetInput(time); ResetInput(title); addFromShow=false">ADD +</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="selectedDay == null">
+        Select Day!
+    </div>
+
+
+
+</div>

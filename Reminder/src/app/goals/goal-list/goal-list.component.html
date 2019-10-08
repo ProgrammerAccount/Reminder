@@ -1,0 +1,76 @@
+<main>
+    <div *ngFor="let goal of goalsManager.objects">
+      <table>
+        <tr>
+          <td class="td_title">
+            <input class="goalTitle" [(ngModel)]="goal.title" (change)="goalsManager.Edit(goal)">
+          </td>
+          <td class="td_icon">
+            <button mat-icon-button (click)="HideShowElement(commentWindow)">
+              <mat-icon>comment</mat-icon>
+            </button>
+            <div #commentWindow style="display: none">
+              <app-comment [(object)]="goal">
+                <button (click)="HideShowElement(commentWindow)" mat-icon-button>
+                  <mat-icon>close</mat-icon>
+                </button>
+              </app-comment>
+            </div>
+          <td class="td_icon" (click)= "Remove(goal)">
+            <button mat-icon-button>
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+  
+          <td class="td_icon">
+            <button #StepBtn mat-icon-button class="ShowStepBtn StepBtn" (click)="HideShowElement(stepsContainer); btnAnimation(StepBtn); stepsManagerInit(goal)">
+              <mat-icon> expand_more</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+      <div #stepsContainer class="stepsContainer">
+        <div *ngFor="let task of goal.stepsManager?.objects">
+          <app-task [(task)]="task" (taskEdit)="goal.stepsManager.Edit($event)" (taskRemove)=goal.stepsManager.Remove($event)></app-task>
+        </div>
+        <div #addTaskForm class="addTask">
+          <table>
+            <tr>
+              <td class="ADDtd_title">
+                <input #title placeholder="Title" id="title" type="text" id="title">
+              </td>
+  
+            </tr>
+          </table>
+          <table>
+            <tr>
+              <td class="ADDtd_date">
+                <input [owlDateTimeTrigger]="dtAdd" [ngModel]="TodayDate" #dateFieldAdd [owlDateTime]="dtAdd">
+                <owl-date-time #dtAdd></owl-date-time>
+              </td>
+              <td class="ADDtd_emptySpace"></td>
+              <td>
+                <button id="btnCancelAddTask" (click)="ResetInput(title,dateFieldAdd,addTaskForm,showForm)">
+                  Cancel
+                </button>
+              </td>
+              <td class="ADDtd_SubmitButton">
+  
+                <button id="btnSubmitAddTask" (click)="AddTaskButtonClick(goal,title,dateFieldAdd,project,addTaskForm)">
+                  Add Task
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div #addTaskForm class="addTask NotDisplay">
+      <input #title class="title" type="text" id="title">
+  
+      <button (click)="AddGoalButtonClick(title);HideShowElement(addTaskForm); HideShowElement(showForm)"> Add Goal</button>
+  
+    </div>
+    <button #showForm (click)="HideShowElement(addTaskForm); HideShowElement(showForm)" class="AddGoalButton">+ Add Goal</button>
+  
+  </main>

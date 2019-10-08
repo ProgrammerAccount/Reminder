@@ -1,0 +1,45 @@
+<main>
+    <div *ngFor="let task of TaskM.objects; let index = index" class="task">
+      <h3 *ngIf="CanDisplayDate(task.date)">{{ GetDate(task.date) }}</h3>
+      <app-task [task]="task" (taskEdit)="TaskM.Edit($event)" (timerStart)="TimerStart(task.title, task.id)"
+        (taskRemove)="TaskM.Remove($event)"></app-task>
+    </div>
+  
+    <div #addTaskForm class="addTask NotDisplay">
+      <div class="TitleProjectContainer">
+        <input #title placeholder="Title" id="title" type="text" id="title" />
+  
+        <mat-select id="project" [value]="0" #project>
+          <mat-option [value]="0">NONE</mat-option>
+  
+          <mat-option *ngFor="let project of projectM.objects" [value]="project.id">
+            {{ project.title }}
+          </mat-option>
+        </mat-select>
+      </div>
+      <div class="dateButtonContainer">
+        <input class="date" [owlDateTimeTrigger]="dtAdd" [(ngModel)]="TodayDate" #dateFieldAdd [owlDateTime]="dtAdd" />
+        <owl-date-time [startAt]="TodayDate" #dtAdd></owl-date-time>
+        <div class="emptySpace"></div>
+        <button id="btnCancelAddTask" (click)="ResetAddFrom(title, dateFieldAdd, addTaskForm, showForm)">
+          Cancel
+        </button>
+  
+        <button id="btnSubmitAddTask" (click)="
+            AddTaskButtonClick(
+              title,
+              dateFieldAdd,
+              project,
+              addTaskForm,
+              showForm
+            )
+          ">
+          Add Task
+        </button>
+      </div>
+    </div>
+  
+    <button #showForm (click)="HideShowElement(showForm); HideShowElement(addTaskForm)" class="AddTaskButton">
+      + Add Task
+    </button>
+  </main>

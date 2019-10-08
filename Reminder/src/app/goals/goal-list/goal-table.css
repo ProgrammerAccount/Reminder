@@ -1,0 +1,44 @@
+@media only screen and (max-width:768px) {
+  .td_done {
+    width: 2%;
+  }
+
+  .td_title {
+    width: 82%;
+  }
+
+  .td_iconComment {
+    width: 2%;
+  }
+
+  .td_date {
+    display: none;
+
+  }
+
+  .td_queue {
+    display: none;
+  }
+
+  .td_project {
+    width: 10%;
+  }
+
+  .td_iconMenu {
+    width: 4%;
+  }
+}
+
+.td_done {
+  width: 2%;
+}
+
+.td_title {
+  width:100%;
+}
+.td_icon{
+  width: 40px;
+}
+.td{
+  display: inline-block;
+}

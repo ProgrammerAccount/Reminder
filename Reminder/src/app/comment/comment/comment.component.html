@@ -1,0 +1,25 @@
+<div class="commentWindow">
+  <div class="CommentWindowCloseBtn">
+    <ng-content></ng-content>
+  </div>
+  <div class="title">{{object.title}}</div>
+
+  <ul>
+    <li *ngFor="let comment of comments; ">
+      <input class="commentIN" [(ngModel)]="comment.value" (focusout)="EditComment(comment)">
+      <button class="trashIcon" mat-icon-button (click)="RemoveComment(comment);">
+        <mat-icon>delete</mat-icon>
+
+      </button>
+    </li>
+    <li>
+
+      <input #com id="ADDComment" type="text">
+      <button mat-icon-button id="AddCommentBtn" (click)="AddComment(com); ResteCommentInput(com)">
+        <mat-icon>add</mat-icon>
+        Add
+      </button>
+    </li>
+  </ul>
+
+</div>

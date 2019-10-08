@@ -1,0 +1,13 @@
+<div class="container">
+
+    <button mat-icon-button (click)="Start()"
+      [disabled]="SubTimerM.RunningTimer && (SubTimerM.RunningTimer.id_task == taskID)">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+  
+  
+    <button (click)="Stop()" mat-icon-button
+      [disabled]="!SubTimerM.RunningTimer || (SubTimerM.RunningTimer && SubTimerM.RunningTimer.id_task != taskID)">
+      <mat-icon>stop</mat-icon>
+    </button>
+  </div>
