@@ -19,7 +19,7 @@ export class DayComponent implements OnInit {
     this._isSelected = value;
     if (value) {
       this.OnSelectChange('#ccc');
-    } else { this.OnSelectChange('#6016B4'); }
+    } else { this.OnSelectChange('#fff'); }
   }
   private isEvent = false;
 

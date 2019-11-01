@@ -6,16 +6,14 @@ from flask import Flask, jsonify, request
 from .main import get_object, app, HEADER_AUTH, JWT_SECRET, JWT_ALGORITHM, get_user_idJWT
 
 
-@app.route('/event', methods=['GET'])
-def get_event():
+@app.route('/event/<int:id_calendar>', methods=['GET'])
+def get_event(id_calendar):
     id_user = get_user_idJWT()
 
     if id_user:
         sess = Session()
-        print(id_user)
-        events = sess.query(Event).filter(Event.id_user == id_user).all()
+        events = sess.query(Event).filter(Event.id_calendar == id_calendar).all()
         events = EventSchema(many=True).dump(events)
-        print(events)
         sess.close()
         return jsonify(events), 201
     return ''

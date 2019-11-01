@@ -41,3 +41,4 @@ from .rutines import *
 from .subTimers import *
 from .tasks import *
 from .event import *
+from .calendar import *

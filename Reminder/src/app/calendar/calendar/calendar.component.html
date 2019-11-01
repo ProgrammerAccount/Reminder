@@ -1,20 +1,30 @@
-<header>
-    <h3>Calendar</h3>
+<header *ngIf="calendarService.objects !== undefinded">
+    <div class="titleBarWithArrowContainer calendarName" *ngIf="SelectedCalendarName !== ''">
+        <div class="arrow" (click)="GetForwardCalendar()"><i class="material-icons" style="font-size: 33px">
+                keyboard_arrow_left
+            </i></div>
+        <h3 class="content">{{SelectedCalendarName}}</h3>
+        <div class="arrow" (click)="GetNextCalendar()"><i class="material-icons" style="font-size: 33px">
+                keyboard_arrow_right
+            </i></div>
+    </div>
 </header>
 <!-- new menu component-->
 
 <div class="container">
 
-    <div class="monthAndYear">
+    <div class="titleBarWithArrowContainer month">
 
-        <div class="arrow forwardMonth" (click)="ChangeMonth(DisplayMonth-1)"><img
-                src="../assets/icons/ic_chevron_left.svg"></div>
+        <div class="arrow forwardMonth" (click)="ChangeMonth(DisplayMonth-1)"><i class="material-icons">
+                keyboard_arrow_left
+            </i></div>
         <div class="content">{{DateString}}</div>
-        <div class="arrow nextMonth" (click)="ChangeMonth(DisplayMonth+1)"><img
-                src="../assets/icons/ic_chevron_right.svg"></div>
+        <div class="arrow nextMonth" (click)="ChangeMonth(DisplayMonth+1)"><i class="material-icons">
+                keyboard_arrow_right
+            </i></div>
     </div>
 
-    <table *ngIf="calendarServ.objects !== undefined">
+    <table>
         <tr>
             <th>Mon</th>
             <th>Tue</th>
@@ -32,18 +42,24 @@
     </table>
 
     <ul class="eventList ">
-        <li *ngFor="let event of calendarServ.objects " class="event "> {{event.title}}</li>
+        <li *ngFor="let event of eventService.objects " class="event "> {{event.title}}</li>
     </ul>
     <div *ngIf="selectedDay != null">
         <div class="addEvent " ng-init="addFromShow=false">
             <div *ngIf="!addFromShow" class="addBtnForm">
-                <div *ngIf="calendarServ.objects == []" class="content ">No events for this month</div>
+                <div *ngIf="eventService.objects == []" class="content ">No events for this month</div>
                 <button (click)="addFromShow = true" class="addButton ">+</button>
             </div>
             <div *ngIf="addFromShow" class="addBtnForm">
-                <input placeholder="Title" class="title" #title type="text" />
-                <input #time type="time" />
-                <button (click)="AddEvent(title,time); ResetInput(time); ResetInput(title); addFromShow=false">ADD +</button>
+                <div class="TitleAndTimeInput">
+                    <input placeholder="Title" class="title" #title type="text" />
+                    <input class="time" #time type="time" />
+                </div>
+                 <!-- submitButton class have set every property with important --> 
+                 <i class="submitButton material-icons" 
+                  (click)="AddEvent(title,time); ResetInput(time); ResetInput(title); addFromShow=false">
+                    send
+                </i>
             </div>
         </div>
     </div>
