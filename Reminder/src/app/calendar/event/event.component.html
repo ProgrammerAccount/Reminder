@@ -1,5 +1,31 @@
-<div>
-    <div class="dot"></div>
+<div (click)="OpenPopUpMenu(menu)">
+
     <div class="content">{{event.title}}</div>
-    <div class="date">{{dateString}}</div>
+
+    <div class="date">{{event.time}}</div>
+
 </div>
+
+<div #menu class="popupMenu">
+
+    <div class="header">
+        <div>{{event.title}}</div>
+        <div> <i (click)="ClosePopUpMenu(menu)" class="material-icons">
+                close
+            </i></div>
+    </div>
+    <div class="dateTime">{{event.date}}</div>
+    <div class="remindersTime">TODO</div>
+    <div class="optinsButtons">
+        <i class="material-icons">
+            edit
+        </i>
+        <i class="material-icons">
+            delete
+        </i>
+        <i class="material-icons">
+            email
+        </i>
+    </div>
+</div>
+<div class="overlay" (click)="ClosePopUpMenu(menu)" style="clear:both"></div>

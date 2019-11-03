@@ -1,0 +1,136 @@
+div.date::before {
+    border: 5px solid #ccc;
+    max-height: 10px !important;
+    width: 10px !important;
+    border-radius: 100%;
+    content: '';
+    display: inline-block;
+    margin-right: 5px;
+}
+
+.date {
+    font-size: small;
+    margin-bottom: 10px;
+}
+
+@media (min-width:800px) {
+    .popupMenu {
+        border: 2px solid black;
+        position: fixed;
+        width: 80%;
+        max-width: 600px;
+        height: 200px;
+        box-sizing: border-box;
+        padding: 25px;
+        top: 50%;
+        left: 50%;
+        z-index: 2;
+        transform: translate(-50%, -50%) scale(0);
+        background-color: whitesmoke;
+    }
+    .popupMenu.active {
+        transform: translate(-50%, -50%) scale(1);
+    }
+    .popupMenu>.header {
+        font-size: 25px;
+        padding: 5px 15px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .popupMenu>.header i {
+        cursor: pointer;
+    }
+    .popupMenu>.dateTime {
+        font-size: 15px;
+        padding: 5px 25px;
+    }
+    .popupMenu>.remindersTime {
+        font-size: 15px;
+        padding: 0px 25px;
+    }
+    .popupMenu>.optinsButtons {
+        float: right;
+        font-size: 25px;
+        padding-right: 15px;
+    }
+    .popupMenu>.optinsButtons>i {
+        padding: 3px;
+        cursor: pointer;
+    }
+    .overlay.active {
+        transform: scale(1);
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: scale(0);
+    }
+}
+
+@media (max-width:799px) {
+    .popupMenu {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 25px;
+        z-index: 2;
+        transform: scale(0);
+        background-color: whitesmoke;
+    }
+    .popupMenu.active {
+        transform: scale(1);
+    }
+    .popupMenu>.header>div {
+        top: 60px;
+        width: 100%;
+        position: relative;
+    }
+    .popupMenu>.header {
+        font-size: 45px;
+        padding: 5px 15px;
+        height: 150px;
+    }
+    .popupMenu>.header i {
+        cursor: pointer;
+        top: 25px;
+        right: 25px;
+        position: fixed;
+    }
+    .popupMenu>.dateTime {
+        font-size: 15px;
+        padding: 40px 25px 5px 25px;
+    }
+    .popupMenu>.remindersTime {
+        font-size: 15px;
+        padding: 0px 25px;
+    }
+    .popupMenu>.optinsButtons {
+        display: flex;
+        justify-content: center;
+        font-size: 25px;
+        padding-right: 15px;
+        position: absolute;
+        bottom: 25px;
+        width: calc(100% - 50px);
+    }
+    .popupMenu>.optinsButtons>i {
+        padding: 3px;
+        cursor: pointer;
+    }
+    .overlay.active {
+        transform: scale(1);
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: scale(0);
+    }
+}

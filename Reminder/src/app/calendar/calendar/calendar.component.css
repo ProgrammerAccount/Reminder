@@ -51,6 +51,9 @@ th {
 
 .eventList {
     list-style-type: none;
+    max-width:650px;
+    margin:auto;
+    padding: 10px 0px 10px 20px;
 }
 
 .container {

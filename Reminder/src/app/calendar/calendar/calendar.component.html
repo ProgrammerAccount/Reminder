@@ -42,7 +42,7 @@
     </table>
 
     <ul class="eventList ">
-        <li *ngFor="let event of eventService.objects " class="event "> {{event.title}}</li>
+        <li *ngFor="let event of eventService.objects " class="event "> <app-event [event]= "event" ></app-event></li>
     </ul>
     <div *ngIf="selectedDay != null">
         <div class="addEvent " ng-init="addFromShow=false">
