@@ -14,6 +14,7 @@ def get_event(id_calendar):
         sess = Session()
         events = sess.query(Event).filter(Event.id_calendar == id_calendar).all()
         events = EventSchema(many=True).dump(events)
+
         sess.close()
         return jsonify(events), 201
     return ''

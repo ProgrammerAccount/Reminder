@@ -6,7 +6,7 @@
 
 </div>
 
-<div #menu class="popupMenu">
+<div #menu class="popup">
 
     <div class="header">
         <div>{{event.title}}</div>
@@ -14,12 +14,31 @@
                 close
             </i></div>
     </div>
-    <div class="dateTime">{{event.date}}</div>
-    <div class="remindersTime">TODO</div>
+    <div class="dateTime">
+        <input #date id="EventDate" [owlDateTime]="EventDate" [(value)]="event.date" [owlDateTimeTrigger]="EventDate"
+            [(ngModel)]="event.date">
+        <owl-date-time #EventDate></owl-date-time>
+    </div>
+
+    <ul id="remindersTime">
+        <li *ngFor="let reminder of event.reminders">
+            <input [value]="MilisecConverter(reminder.time_before_in_milisec)" type="number" min="0" max="59">
+            <select>
+                <option selected>Minut</option>
+                <option>Godzin</option>
+                <option>Dni</option>
+            </select>
+            <i (click)="RemoveReminder(reminder)" class="material-icons">
+                    delete
+                </i>
+        </li>
+        <li (click)="addReminder()" id="AddButtonList">Dodaj Przypomnienie</li>
+
+
+    </ul>
+
     <div class="optinsButtons">
-        <i class="material-icons">
-            edit
-        </i>
+
         <i class="material-icons">
             delete
         </i>

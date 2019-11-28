@@ -16,6 +16,7 @@ export class CalendarService extends AbstractService {
     this.Get();
     let ID_LastUsedCalendarOnThisDeviceString = localStorage.getItem("ID_LastUsedCalendarOnThisDevice");
     this.ID_lastUsedCalendar = (ID_LastUsedCalendarOnThisDeviceString !== null) ? parseInt(ID_LastUsedCalendarOnThisDeviceString, 10) : undefined
+    this.SelectedCalendar = this.GetSelectedCalendar();
   }
   Add(title: string) {
     this.connectionAPI

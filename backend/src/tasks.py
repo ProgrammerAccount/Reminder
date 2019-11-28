@@ -41,6 +41,7 @@ def get_tasks_by_project(id):
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
 
+    
     id_user = get_user_idJWT()
     if id_user:
         sess = Session()

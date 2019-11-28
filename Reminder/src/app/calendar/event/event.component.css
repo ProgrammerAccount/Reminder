@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
 div.date::before {
     border: 5px solid #ccc;
     max-height: 10px !important;
@@ -8,52 +9,81 @@ div.date::before {
     margin-right: 5px;
 }
 
+ul#remindersTime {
+    font-family: 'Ubuntu', sans-serif;
+    list-style-type: none;
+}
+ul#remindersTime li:nth-child(6){
+    display: none;
+}
+ul#remindersTime>li>i {
+    font-size: 26px;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    vertical-align: middle;
+}
+ul#remindersTime>li> *{
+    border: solid 1px #ccc;
+    border-radius: 4px;
+    background: white;
+    height: 30px;
+}
+
 .date {
     font-size: small;
     margin-bottom: 10px;
 }
 
+.reminderMenu {
+    background: whitesmoke;
+}
+
 @media (min-width:800px) {
-    .popupMenu {
+    .popup {
         border: 2px solid black;
         position: fixed;
         width: 80%;
         max-width: 600px;
-        height: 200px;
+        height: 400px;
         box-sizing: border-box;
         padding: 25px;
         top: 50%;
         left: 50%;
         z-index: 2;
         transform: translate(-50%, -50%) scale(0);
-        background-color: whitesmoke;
+        background-color: rgb(245, 245, 245);
     }
-    .popupMenu.active {
+    .popup.active {
         transform: translate(-50%, -50%) scale(1);
     }
-    .popupMenu>.header {
+    .popup>.header {
         font-size: 25px;
         padding: 5px 15px;
         display: flex;
         justify-content: space-between;
     }
-    .popupMenu>.header i {
+    .popup>.header i {
         cursor: pointer;
     }
-    .popupMenu>.dateTime {
+    .popup>.dateTime {
         font-size: 15px;
         padding: 5px 25px;
     }
-    .popupMenu>.remindersTime {
+    .popup>#remindersTime {
         font-size: 15px;
         padding: 0px 25px;
     }
-    .popupMenu>.optinsButtons {
+    .popup>.optinsButtons {
         float: right;
         font-size: 25px;
         padding-right: 15px;
+        bottom: 30px;
+        right: 30px;
+        position: absolute;
     }
-    .popupMenu>.optinsButtons>i {
+    .popup>.optinsButtons>i {
         padding: 3px;
         cursor: pointer;
     }
@@ -70,8 +100,14 @@ div.date::before {
     }
 }
 
+#EventDate {
+    background: whitesmoke;
+    border: none;
+    width: 100%;
+}
+
 @media (max-width:799px) {
-    .popupMenu {
+    .popup {
         position: fixed;
         top: 0;
         bottom: 0;
@@ -82,34 +118,34 @@ div.date::before {
         transform: scale(0);
         background-color: whitesmoke;
     }
-    .popupMenu.active {
+    .popup.active {
         transform: scale(1);
     }
-    .popupMenu>.header>div {
+    .popup>.header>div {
         top: 60px;
         width: 100%;
         position: relative;
     }
-    .popupMenu>.header {
+    .popup>.header {
         font-size: 45px;
         padding: 5px 15px;
         height: 150px;
     }
-    .popupMenu>.header i {
+    .popup>.header i {
         cursor: pointer;
         top: 25px;
         right: 25px;
         position: fixed;
     }
-    .popupMenu>.dateTime {
+    .popup>.dateTime {
         font-size: 15px;
         padding: 40px 25px 5px 25px;
     }
-    .popupMenu>.remindersTime {
+    .popup>.remindersTime {
         font-size: 15px;
         padding: 0px 25px;
     }
-    .popupMenu>.optinsButtons {
+    .popup>.optinsButtons {
         display: flex;
         justify-content: center;
         font-size: 25px;
@@ -118,7 +154,7 @@ div.date::before {
         bottom: 25px;
         width: calc(100% - 50px);
     }
-    .popupMenu>.optinsButtons>i {
+    .popup>.optinsButtons>i {
         padding: 3px;
         cursor: pointer;
     }

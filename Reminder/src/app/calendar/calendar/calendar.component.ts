@@ -141,7 +141,9 @@ export class CalendarComponent implements OnInit {
     this.DateStringUpdate();
   }
   AddEvent(title: HTMLInputElement, time: HTMLInputElement) {
+    
     this.eventService.Add(title.value, new Date(this.selectedDay.date), time.value,this.calendarService.SelectedCalendar.id);
+    debugger
   }
   ngAfterViewInit() {
     this.SetDefaultCalendar()
