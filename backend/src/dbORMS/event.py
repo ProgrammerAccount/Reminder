@@ -29,7 +29,7 @@ class Event(Base):
     reminders = relationship("EventReminders", backref="owner")
 
 
-    def __init__(self, title, date, time, color, id_calendar, id=None):
+    def __init__(self, title, date, time, color, id_calendar,reminders, id=None):
         self.title = title
         self.time = time
         self.date = date

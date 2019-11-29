@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CalendarEvent } from '../event';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-event',
@@ -9,7 +10,7 @@ import { CalendarEvent } from '../event';
 
 export class EventComponent implements OnInit {
   @Input() event: CalendarEvent;
-  constructor() { }
+  constructor(private eventService: EventService) { }
 
   ngOnInit() {
   }
@@ -22,6 +23,7 @@ export class EventComponent implements OnInit {
     if (this.event.reminders == undefined)
       this.event.reminders = []
     this.event.reminders.push({ "time_before_in_milisec": 10 * 60000 })
+    this.eventService.Edit(this.event)
   }
   MilisecConverter(miliseconds: number) {
     if (miliseconds / 60000 < 60) return miliseconds / 60000;
