@@ -1,8 +1,8 @@
 from .dbConn import Base
 import datetime
-from .eventReminders import EventReminders, EventRemindersSchema
+from .eventNotification import EventNotification, EventNotificationSchema
 from sqlalchemy import create_engine, Column, String, Integer, DateTime, Date, Time, Boolean, ForeignKey
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields,EXCLUDE
 from sqlalchemy.orm import relationship
 
 
@@ -13,7 +13,8 @@ class EventSchema(Schema):
     time = fields.String()
     id_calendar = fields.Number()
     color = fields.Str()
-    reminders = fields.Nested(EventRemindersSchema, many=True)
+
+
 
 
 
@@ -26,13 +27,14 @@ class Event(Base):
     id_calendar = Column(Integer)
     color = Column(String)
     
-    reminders = relationship("EventReminders", backref="owner")
+    reminders = relationship(EventNotification, backref="owner")
 
 
-    def __init__(self, title, date, time, color, id_calendar,reminders, id=None):
+    def __init__(self, title, date, time, color, id_calendar, id=None):
         self.title = title
         self.time = time
         self.date = date
         self.id = id
         self.id_calendar = id_calendar
         self.color = color
+

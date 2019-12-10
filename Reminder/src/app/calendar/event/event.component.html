@@ -20,19 +20,19 @@
         <owl-date-time #EventDate></owl-date-time>
     </div>
 
-    <ul id="remindersTime">
+    <ul *ngIf="event.reminders" id="remindersTime">
         <li *ngFor="let reminder of event.reminders">
-            <input [value]="MilisecConverter(reminder.time_before_in_milisec)" type="number" min="0" max="59">
-            <select>
-                <option selected>Minut</option>
-                <option>Godzin</option>
-                <option>Dni</option>
+            <input #timeValue [value]="MilisecConverter(reminder.time_before_in_milisec)" (change)="UpdateNotyfication(timeValue.value,timeUnit.value,reminder)" type="number" min="0" max="59">
+            <select #timeUnit>
+                <option value="60000" selected>Minut</option>
+                <option value="3600000">Godzin</option>
+                <option value="86400000">Dni</option>
             </select>
-            <i (click)="RemoveReminder(reminder)" class="material-icons">
+            <i (click)="RemoveEventNotyfication(reminder)" class="material-icons">
                     delete
                 </i>
         </li>
-        <li (click)="addReminder()" id="AddButtonList">Dodaj Przypomnienie</li>
+        <li (click)="addEventNotyfication()" id="AddButtonList">Dodaj Przypomnienie</li>
 
 
     </ul>

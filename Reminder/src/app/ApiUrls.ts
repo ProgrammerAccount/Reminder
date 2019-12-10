@@ -8,4 +8,5 @@ export namespace URL {
   export const API_LOGIN = API + '/login';
   export const API_RUTINES = API + '/rutines';
   export const API_TASK_COMMENT = API_TASK + '/comments';
+  export const API_EVENT_NOTYFICATION = API_EVENT + '/notyfication';
 }

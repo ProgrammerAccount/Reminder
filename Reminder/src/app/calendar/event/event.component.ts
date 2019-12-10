@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { CalendarEvent } from '../event';
+import { CalendarEvent, Notyfication } from '../event';
 import { EventService } from '../event.service';
 
 @Component({
@@ -14,16 +14,35 @@ export class EventComponent implements OnInit {
 
   ngOnInit() {
   }
-  RemoveReminder(reminder) {
+  RemoveEventNotyfication(reminder) {
     let index = this.event.reminders.indexOf(reminder);
     if (index != -1)
       this.event.reminders.splice(index, 1)
+      this.eventService.RemoveNotyfication(reminder.id_event,reminder.time_before_in_milisec);
+
   }
-  addReminder() {
+  UpdateNotyfication(time:number,time_unit:number,changedReminder:Notyfication)
+  {
+    
+    let i = 0;
+    for(;i<this.event.reminders.length;i++)
+
+      if (changedReminder.id == this.event.reminders[i].id)
+      {
+        this.event.reminders[i].time_before_in_milisec=time*time_unit;
+        break
+      }
+      
+    
+    this.eventService.UpdateNotyfication(this.event.reminders[i]);
+    
+  }
+  addEventNotyfication() {
     if (this.event.reminders == undefined)
       this.event.reminders = []
-    this.event.reminders.push({ "time_before_in_milisec": 10 * 60000 })
-    this.eventService.Edit(this.event)
+    this.event.reminders.push(new Notyfication(this.event.id, 600000 ));
+    this.eventService.AddNotyfication(this.event.id,10 * 60000)
+
   }
   MilisecConverter(miliseconds: number) {
     if (miliseconds / 60000 < 60) return miliseconds / 60000;

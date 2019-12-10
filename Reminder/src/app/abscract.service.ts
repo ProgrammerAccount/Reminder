@@ -23,7 +23,7 @@ export abstract class AbstractService {
     }
     abstract Sort(): void;
     Edit(object: any) {
-        debugger
+        
         this.connectionAPI.updateObjects(this.URL, object).subscribe(res => {
         },
             console.error
