@@ -20,29 +20,44 @@ def get_event(id_calendar):
     return ''
 
 
+@app.route('/event', methods=['PUT'])
+def update_event():
+    id_user = get_user_idJWT()
+    if id_user:
+        posted_Event = EventSchema(
+            only=('title', 'date', 'time', 'color', 'id_calendar','id'),unknown="EXCLUDE").load(request.get_json())
+        print (posted_Event)
+
+        event = Event(**posted_Event)
+        if event.time == 0:
+            event.time = None
+        sess = Session()
+        event_from_db = sess.query(Event).filter(Event.id == event.id).first()
+        event_from_db.time=event.time
+        event_from_db.date=event.date
+        sess.commit()
+        sess.close()
+
+        return '', 201
+    return ''
+
 @app.route('/event', methods=['POST'])
 def add_event():
     id_user = get_user_idJWT()
     if id_user:
         posted_Event = EventSchema(
-            only=('title', 'date', 'time', 'color', 'id_calendar','id')).load(request.get_json())
+            only=('title', 'date', 'time', 'color', 'id_calendar')).load(request.get_json())
         event = Event(**posted_Event)
         if event.time == 0:
             event.time = None
         sess = Session()
-
-       # if sess.query(Event.date).filter(Event.date == event.date).count() != 0:
-       #     event.color = sess.query(Event.date).filter(
-       #         Event.date == evenrequest
-        sess = Session()
-        event_from_db = sess.query(Event).filter(Event.id == event.id).first()
-        event_from_db=event
+        sess.add(event)
+        new_event = EventSchema().dump(event)
         sess.commit()
         sess.close()
 
-        return jsonify(EventSchema().dump(event_from_db)), 201
+        return jsonify(new_event), 201
     return ''
-
 
 @app.route('/event/<int:id>', methods=['DELETE'])
 def delete_event(id):

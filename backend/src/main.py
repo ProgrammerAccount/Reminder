@@ -12,6 +12,8 @@ from .dbORMS.comments_to_task import comment_to_task, comment_to_taskSchema
 from .dbORMS.eventNotification import EventNotificationSchema, EventNotification
 import jwt
 app = Flask(__name__)
+app.config['SQLALCHEMY_ECHO'] = True
+
 CORS(app)
 Base.metadata.create_all(engine)
 HEADER_AUTH = 'Authorization'
