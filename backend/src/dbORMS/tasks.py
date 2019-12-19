@@ -31,9 +31,9 @@ class Tasks(Base):
     id_user = Column(Integer, ForeignKey('user.id'))
     subTimer = relationship("SubTimer", backref="task")
     comments = relationship("comment_to_task", backref="task")
-    reminders = relationship(Notification, backref="owner")
+    reminders = relationship("Notification", backref="owner")
 
-    def __init__(self, title, id_project, date, queue, status, priority, id_user, reminder, reminding_dateTime, id_calendar, id=None):
+    def __init__(self, title, id_project, date, queue, status, priority, id_user, id=None):
         self.title = title
         self.id_project = id_project
         self.date = date

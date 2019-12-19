@@ -18,7 +18,7 @@ class Projects(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String(50))
     id_user = Column(Integer)
-    tasks = relationship("tasks", backref="project")
+    tasks = relationship("Tasks", backref="project")
     comments = relationship("comment_to_project", backref="project")
 
     def __init__(self, title, id_user, id=None):

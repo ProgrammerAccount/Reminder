@@ -55,10 +55,10 @@ def delete_rutines(id):
 def edit_rutines():
     id_user = get_user_idJWT()
     if id_user:
-        posted_rutine = RutinesSchema(only=('id','id_task','recurring_days','id_user'))
+        posted_rutine = RutinesSchema(only=('id','id_task','recurring_day','id_user'))
         rutines = Rutines(**posted_rutine)
         conn = engine.connect()
-        stmt = update(Rutines).where(and_(Rutines.id==rutines.id,Rutines.id_user == rutines.id_user)).values(id_task=rutines.id_task,recurring_days= rutines.recurring_days)
+        stmt = update(Rutines).where(and_(Rutines.id==rutines.id,Rutines.id_user == rutines.id_user)).values(id_task=rutines.id_task,recurring_day= rutines.recurring_days)
         conn.execute(stmt)
         return '' 
         

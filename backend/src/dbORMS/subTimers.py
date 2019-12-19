@@ -19,7 +19,6 @@ class SubTimer(Base):
     stop = Column(DateTime)
     id_task = Column(Integer, ForeignKey('tasks.id'))
     id_user = Column(Integer, ForeignKey("user.id"))
-    task = relationship("Tasks", back_populates="subTimer")
 
 
 def __init__(self, start, stop, id_task, id_user, id=None):

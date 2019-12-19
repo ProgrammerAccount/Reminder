@@ -58,7 +58,7 @@ def add_tasks():
     id_user = get_user_idJWT()
     if id_user:
         posted_task = TasksSchema(only=('title', 'id_project', 'date', 'queue',
-                                        'status', 'priority', 'id_user', 'reminder', 'reminding_dateTime')).load(request.get_json())
+                                        'status', 'priority', 'id_user')).load(request.get_json())
         task = Tasks(**posted_task)
         task.id_user = id_user
         if task.id_project == 0:

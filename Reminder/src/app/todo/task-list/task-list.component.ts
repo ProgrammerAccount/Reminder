@@ -4,6 +4,7 @@ import { GoalService } from 'src/app/goals/goal.service';
 import { TaskService } from '../task.service';
 import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/api.service';
+import { Moment } from 'moment';
 
 @Component({
   selector: 'app-task-list',
@@ -35,8 +36,10 @@ export class TaskListComponent implements OnInit {
     this.projectM = new GoalService(this.connectionAPI);
   }
   // tslint:disable-next-line:max-line-length
-  AddTaskButtonClick(title: HTMLInputElement, date: HTMLInputElement, project: HTMLInputElement, addTaskForm: any, thisButton: any): void {
-    this.TaskM.Add(title.value, new Date(date.value), parseInt(project.value, 10));
+  AddTaskButtonClick(title: HTMLInputElement, date: any, project: HTMLInputElement, addTaskForm: any, thisButton: any): void {
+    
+    this.TaskM.Add(title.value, new Date(date.selected._i), parseInt(project.value, 10));
+    debugger
     this.ResetAddFrom(title, date, addTaskForm, thisButton);
   }
   ResetAddFrom(title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any, thisButton: any): void {
