@@ -9,7 +9,7 @@ from .dbORMS.subTimers import SubTimer, SubTimerSchema
 from .dbORMS.comments import Comment, CommentSchema
 from .dbORMS.comments_to_project import comment_to_project, comment_to_projectSchema
 from .dbORMS.comments_to_task import comment_to_task, comment_to_taskSchema
-from .dbORMS.eventNotification import EventNotificationSchema, EventNotification
+from .dbORMS.notification import NotificationSchema, Notification
 import jwt
 app = Flask(__name__)
 app.config['SQLALCHEMY_ECHO'] = True
@@ -43,5 +43,4 @@ from .projects import *
 from .rutines import *
 from .subTimers import *
 from .tasks import *
-from .calendar import *
 

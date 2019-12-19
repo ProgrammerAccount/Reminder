@@ -42,8 +42,6 @@ export class TaskService extends AbstractService //Metody Remove Edit i Get Dzie
           'status': false,
           'priority': 1,
           'id_user': 1,
-          'reminder': false,
-          'reminding_dateTime': date
         })
         .subscribe(res => {
           this.objects.push(res);

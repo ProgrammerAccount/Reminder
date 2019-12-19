@@ -4,17 +4,16 @@ from sqlalchemy import create_engine, Column, String, Integer, DateTime, Date, T
 from marshmallow import Schema, fields
 from sqlalchemy.orm import relationship
 
-
-class EventNotificationSchema(Schema):
+class NotificationSchema(Schema):
     id = fields.Number()
     id_event = fields.Number()
     time_before_in_milisec = fields.Integer()
 
 
-class EventNotification(Base):
-    __tablename__ = 'eventNotification'
+class Notification(Base):
+    __tablename__ = 'notification'
     id = Column(Integer, primary_key=True, nullable=True)
-    id_event = Column(Integer, ForeignKey("Tasks.id"))
+    id_event = Column(Integer, ForeignKey("tasks.id"))
     time_before_in_milisec = Column(Integer)
     
     def __init__(self, id_event, time_before_in_milisec, id=None):

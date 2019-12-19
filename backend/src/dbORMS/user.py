@@ -13,7 +13,6 @@ class User(Base):
     task = relationship("Tasks", backref='user')
     rutines = relationship("Rutines")
 
-
     def __init__(self, email, password, id=None):
         self.email = email
         self.password = password

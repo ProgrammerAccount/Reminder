@@ -9,8 +9,6 @@
         public status: boolean,
         public priority: number,
         public id_user: number,
-        public reminder: boolean,
-        public reminding_dateTime: Date
     ){}
     }
     

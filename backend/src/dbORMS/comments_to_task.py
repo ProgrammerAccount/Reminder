@@ -13,7 +13,7 @@ class comment_to_taskSchema(Schema):
 class comment_to_task(Base):
     __tablename__ = 'comment_to_task'
     id_comment = Column(Integer, primary_key=True)
-    id_task = Column(Integer, ForeignKey("Tasks.id"), primary_key=True)
+    id_task = Column(Integer, ForeignKey("tasks.id"), primary_key=True)
 
     def __init__(self, id_comment, id_task):
         self.id_comment = id_comment
