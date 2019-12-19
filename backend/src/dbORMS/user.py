@@ -8,10 +8,11 @@ from sqlalchemy.orm import relationship
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True, nullable=True)
-    email = Column(String)
-    password = Column(String)
+    email = Column(String(50))
+    password = Column(String(50))
     task = relationship("Tasks", backref='user')
-    rutines = relationship("Rutines", backref='user')
+    rutines = relationship("Rutines")
+
 
     def __init__(self, email, password, id=None):
         self.email = email

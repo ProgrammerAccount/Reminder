@@ -14,7 +14,7 @@ class EventNotificationSchema(Schema):
 class EventNotification(Base):
     __tablename__ = 'eventNotification'
     id = Column(Integer, primary_key=True, nullable=True)
-    id_event = Column(Integer, ForeignKey("event.id"))
+    id_event = Column(Integer, ForeignKey("Tasks.id"))
     time_before_in_milisec = Column(Integer)
     
     def __init__(self, id_event, time_before_in_milisec, id=None):

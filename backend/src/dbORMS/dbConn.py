@@ -10,5 +10,7 @@ db_port="3600"
 engine = create_engine('mysql+mysqlconnector://'+db_user+':'+db_pass+'@'+db_url+'/'+db_name, pool_size=50, max_overflow=50)
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
+Base.metadata.create_all(engine)
+print("Created")
 
 

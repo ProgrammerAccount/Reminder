@@ -1,5 +1,5 @@
 from .dbORMS.dbConn import Session, engine, Base
-from .dbORMS.event import Event, EventSchema
+from .dbORMS.tasks import Tasks, TasksSchema
 from sqlalchemy import and_, update
 from flask import Flask, jsonify, request
 from .dbORMS.eventNotification import EventNotificationSchema, EventNotification
@@ -12,9 +12,9 @@ def get_event(id_calendar):
 
     if id_user:
         sess = Session()
-        events = sess.query(Event).filter(
-            Event.id_calendar == id_calendar).all()
-        events = EventSchema(many=True).dump(events)
+        events = sess.query(Tasks).filter(
+            Tasks.id_calendar == id_calendar).all()
+        events = TasksSchema(many=True).dump(events)
         sess.close()
         return jsonify(events), 201
     return ''
@@ -24,15 +24,15 @@ def get_event(id_calendar):
 def update_event():
     id_user = get_user_idJWT()
     if id_user:
-        posted_Event = EventSchema(
+        posted_Event = TasksSchema(
             only=('title', 'date', 'time', 'color', 'id_calendar','id'),unknown="EXCLUDE").load(request.get_json())
         print (posted_Event)
 
-        event = Event(**posted_Event)
+        event = Tasks(**posted_Event)
         if event.time == 0:
             event.time = None
         sess = Session()
-        event_from_db = sess.query(Event).filter(Event.id == event.id).first()
+        event_from_db = sess.query(Tasks).filter(Tasks.id == event.id).first()
         event_from_db.time=event.time
         event_from_db.date=event.date
         sess.commit()
@@ -45,14 +45,14 @@ def update_event():
 def add_event():
     id_user = get_user_idJWT()
     if id_user:
-        posted_Event = EventSchema(
+        posted_Event = TasksSchema(
             only=('title', 'date', 'time', 'color', 'id_calendar')).load(request.get_json())
-        event = Event(**posted_Event)
+        event = Tasks(**posted_Event)
         if event.time == 0:
             event.time = None
         sess = Session()
         sess.add(event)
-        new_event = EventSchema().dump(event)
+        new_event = TasksSchema().dump(event)
         sess.commit()
         sess.close()
 
@@ -64,8 +64,8 @@ def delete_event(id):
     id_user = get_user_idJWT()
     if id_user:
         sess = Session()
-        sess.query(Event).filter(
-            and_(Event.id == id, Event.id_user == id_user)).delete()
+        sess.query(Tasks).filter(
+            and_(Tasks.id == id, Tasks.id_user == id_user)).delete()
         sess.commit()
         sess.close()
         return '', 201

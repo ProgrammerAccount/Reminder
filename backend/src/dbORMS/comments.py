@@ -14,7 +14,7 @@ class CommentSchema(Schema):
 class Comment(Base):
     __tablename__ = 'Comments'
     id = Column(Integer, primary_key=True, nullable=True)
-    value = Column(String)
+    value = Column(String(250))
     id_user = Column(Integer)
 
     def __init__(self, value, id_user, id=None):

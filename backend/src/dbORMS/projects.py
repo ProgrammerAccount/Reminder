@@ -14,7 +14,7 @@ class ProjectsSchema(Schema):
 class Projects(Base):
     __tablename__ = 'Projects'
     id = Column(Integer , primary_key = True)
-    title = Column(String)	
+    title = Column(String(50))	
     id_user = Column(Integer)	
     tasks = relationship("Tasks" , backref="project")
     comments = relationship("comment_to_project",backref="project")

@@ -12,7 +12,7 @@ class CalendarSchema(Schema):
 class Calendar(Base):
     __tablename__ = 'Calendar'
     id = Column(Integer, primary_key=True, nullable=True)
-    name = Column(String)
+    name = Column(String(50))
     id_user = Column(Integer)
 
     def _init_(self, name, id_user, id=None):
