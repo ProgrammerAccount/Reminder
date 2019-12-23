@@ -37,6 +37,7 @@ export class AuthService implements CanActivate {
         if (data !== 'False') {
           localStorage.setItem('token', data);
           window.location.href = '/';
+        
         }
       });
   }

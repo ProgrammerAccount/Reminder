@@ -19,9 +19,11 @@ import { GoalsModule } from './goals/goals.module';
 import { CalendarModule } from './calendar/calendar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
- import { HttpClient } from '@angular/common/http';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RegisterComponent } from './register/register/register.component';
+import { RegisterModule } from './register/register.module';
 const appRoutes: Routes = [
+  { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'todo', component: TaskListComponent, canActivate: [AuthService] },
   { path: 'rutine', component: RutineListComponent, canActivate: [AuthService] },
@@ -54,6 +56,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true }),
     BrowserAnimationsModule,
+    RegisterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

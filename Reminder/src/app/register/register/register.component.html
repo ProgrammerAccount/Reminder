@@ -1,0 +1,10 @@
+<div class="container-flex">
+  <div class="login-form">
+    <h1>Register</h1>
+    <input class="email" #email placeholder="E-mail" type="text" />
+    <input class='password' #pass placeholder="Password" type="password" />
+    <input class='password' #passv2 placeholder="Repeat Password" type="password" />
+    <div class="error" *ngIf = 'regServ.message != undefined'>{{RegisterResult()}}</div>
+    <input class="btn" (click)="regServ.register(email.value,pass.value,passv2.value)" value="Register" type="button" />
+  </div>
+</div>
