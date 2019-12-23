@@ -4,7 +4,7 @@ export class Goal {
     id: number;
     title: string;
     id_user: number;
-    stepsManager: TaskService;
+    stepService: TaskService;
     constructor(title: string, id_user: number, id = 0) {
         this.id = id;
         this.title = title;

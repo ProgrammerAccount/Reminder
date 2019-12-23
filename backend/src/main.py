@@ -43,4 +43,4 @@ from .projects import *
 from .rutines import *
 from .subTimers import *
 from .tasks import *
-
+from .event import *

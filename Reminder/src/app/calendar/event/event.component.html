@@ -15,7 +15,7 @@
             </i></div>
     </div>
     <div class="dateTime">
-        <input #date id="EventDate" [owlDateTime]="EventDate" [(value)]="event.date" [owlDateTimeTrigger]="EventDate"
+        <input #date class="EventDate" [owlDateTime]="EventDate" [(value)]="event.date" [owlDateTimeTrigger]="EventDate"
             [(ngModel)]="event.date" (ngModelChange)="eventService.Edit(event)">
         <owl-date-time #EventDate></owl-date-time>
     </div>

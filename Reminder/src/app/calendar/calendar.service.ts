@@ -12,7 +12,7 @@ export class CalendarService extends AbstractService {
   private ID_lastUsedCalendar: number;
   public SelectedCalendar: Calendar
   constructor(connectionAPI: APIService) {
-    super(connectionAPI, URL.API_CALENDAR);
+    super(connectionAPI, URL.API_GOAL);
     this.Get();
     let ID_LastUsedCalendarOnThisDeviceString = localStorage.getItem("ID_LastUsedCalendarOnThisDevice");
     this.ID_lastUsedCalendar = (ID_LastUsedCalendarOnThisDeviceString !== null) ? parseInt(ID_LastUsedCalendarOnThisDeviceString, 10) : undefined
@@ -20,7 +20,7 @@ export class CalendarService extends AbstractService {
   }
   Add(title: string) {
     this.connectionAPI
-      .addObjects(URL.API_CALENDAR, {
+      .addObjects(URL.API_GOAL, {
         name: title,
       })
       .subscribe(res => {

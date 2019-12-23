@@ -100,7 +100,7 @@ ul#remindersTime>li> *{
     }
 }
 
-#EventDate {
+.EventDate {
     background: whitesmoke;
     border: none;
     width: 100%;

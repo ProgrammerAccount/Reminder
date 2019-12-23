@@ -9,10 +9,11 @@ import { MomentDateTimeAdapter } from 'ng-pick-datetime-moment';
 
 
 export const MY_MOMENT_FORMATS = {
-  parseInput: 'dd, L, LT',
+  parseInput: 'l LT',
   fullPickerInput: 'llll',
-  datePickerInput: 'dd, L, LT',
-  monthYearLabel: 'MMMM YYYY',
+  datePickerInput: 'l',
+  timePickerInput: 'LT',
+  monthYearLabel: 'MMM YYYY',
   dateA11yLabel: 'LL',
   monthYearA11yLabel: 'MMMM YYYY',
 };

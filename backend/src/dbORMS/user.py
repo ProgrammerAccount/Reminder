@@ -22,4 +22,5 @@ class User(Base):
 class UserSchema(Schema):
     id = fields.Number()
     email = fields.Str()
+
     password = fields.Str()

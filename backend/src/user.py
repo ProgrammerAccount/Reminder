@@ -25,3 +25,7 @@ def login():
     else:
         print ("email")
         return "False"
+
+#@app.route("/register",methods=['POST'])
+#def register():
+    

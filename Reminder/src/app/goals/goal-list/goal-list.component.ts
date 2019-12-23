@@ -4,6 +4,9 @@ import { GoalService } from '../goal.service';
 import { Subscription } from 'rxjs';
 import { Goal } from '../goal';
 import { APIService } from 'src/app/api.service';
+import { Moment } from 'moment';
+import { OwlDateTimeComponent } from 'ng-pick-datetime';
+import { MomentDateTimeModule } from 'ng-pick-datetime-moment/moment-adapter/moment-date-time.module';
 
 @Component({
   selector: 'app-goal-list',
@@ -13,8 +16,8 @@ import { APIService } from 'src/app/api.service';
 export class GoalListComponent implements OnInit {
   goalsManager: GoalService;
   goalsSubscription: Subscription;
-  TodayDate: string;
-  TM: TaskService;
+  TodayDate: Date;
+  taskService: TaskService
   ngOnDestroy(): void {
     this.goalsSubscription.unsubscribe();
   }
@@ -23,7 +26,7 @@ export class GoalListComponent implements OnInit {
   }
   // tslint:disable-next-line:max-line-length
   btnAnimation(btn) {
-    btn = btn._elementRef.nativeElement;
+
     if (btn.classList.contains('ShowStepBtn')) {
       btn.classList.remove('ShowStepBtn');
       btn.classList.add('HideStepBtn');
@@ -37,15 +40,15 @@ export class GoalListComponent implements OnInit {
   ResetInputStep(title: HTMLInputElement, date: HTMLInputElement, description: HTMLInputElement, addTaskForm: any, thisButton: any) {
 
     title.value = '';
-    date.value = this.TodayDate;
+    date.value = this.TodayDate.toISOString();
     description.value = '';
 
   }
 
   stepsManagerInit(goal: Goal) {
-    if (goal.stepsManager === undefined) {
-      goal.stepsManager = new TaskService(this.connectionAPI);
-      goal.stepsManager.Get('/' + goal.id);
+    if (goal.stepService === undefined) {
+      goal.stepService = new TaskService(this.connectionAPI);
+      goal.stepService.Get('/' + goal.id);
     }
   }
   // tslint:disable-next-line:max-line-length
@@ -58,13 +61,15 @@ export class GoalListComponent implements OnInit {
   ResetInputGoal(title: HTMLInputElement) {
     title.value = '';
   }
-  AddTaskButtonClick(goal: Goal, title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any): void {
-    goal.stepsManager.Add(title.value, new Date(date.value), goal.id);
+  AddTaskButtonClick(goal: Goal, title: HTMLInputElement, date, addTaskForm: any): void {
+    this.taskService.Add(title.value, date.selected.toDate(), goal.id);
     this.ResetInput(title, date, addTaskForm);
+
   }
-  ResetInput(title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any): void {
+  ResetInput(title: HTMLInputElement, date, addTaskForm: any): void {
     title.value = '';
-    date.value = this.TodayDate;
+    date.selected.set(this.TodayDate);
+    debugger
   }//Ustawia formularz dodawania zadań do celu do domyslnych wartosci
 
   HideShowElement(el: any): void {
@@ -79,9 +84,9 @@ export class GoalListComponent implements OnInit {
     return date.toISOString().substring(0, 10);
   }
   constructor(private connectionAPI: APIService) {
-    this.TodayDate = this.DateToStringYYYYMMDD(new Date());
+    this.TodayDate = new Date();
     this.goalsManager = new GoalService(this.connectionAPI);
-    this.TM = new TaskService(connectionAPI);
+    this.taskService = new TaskService(connectionAPI);
   }
 
 

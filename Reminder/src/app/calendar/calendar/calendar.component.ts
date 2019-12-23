@@ -43,8 +43,7 @@ export class CalendarComponent implements OnInit {
   }
 
   SetDefaultCalendar() { // Return True if SelectedCalendar is !== undefined
-    let SelectedCalendar = this.calendarService.GetSelectedCalendar();
-    
+    let SelectedCalendar = this.calendarService.GetSelectedCalendar();   
     if (SelectedCalendar !== undefined && SelectedCalendar.id !== undefined) {
       this.LoadEvents(SelectedCalendar.id);
       this.SelectedCalendarName = SelectedCalendar.name;
@@ -141,10 +140,10 @@ export class CalendarComponent implements OnInit {
     this.DateStringUpdate();
   }
   AddEvent(title: HTMLInputElement, time: HTMLInputElement) {
-    
-    this.eventService.Add(title.value, new Date(this.selectedDay.date), time.value,this.calendarService.SelectedCalendar.id);
-    debugger
-  }
+    let date =  new Date(this.selectedDay.date);
+    date.setTime(date.getTime() + new Date(time.valueAsDate).getTime());
+    this.eventService.Add(title.value,date,this.calendarService.SelectedCalendar.id);
+    }
   ngAfterViewInit() {
     this.SetDefaultCalendar()
 
