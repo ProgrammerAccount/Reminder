@@ -16,15 +16,14 @@ import time
 @app.route('/tasks', methods=['PUT'])
 def update_task():
     edited_task = TasksSchema(only=('id', 'title', 'id_project', 'date', 'queue',
-                                    'status', 'priority', 'id_user', 'reminder', 'reminding_dateTime')).load(request.get_json())
-
+                                    'status', 'priority', 'id_user')).load(request.get_json())
     task = Tasks(**edited_task)
     if task.id_project == 0:
         task.id_project = None
 
     conn = engine.connect()
     stmt = update(Tasks).where(Tasks.id == task.id).values(title=task.title, id_project=task.id_project, date=task.date, queue=task.queue,
-                                                           status=task.status, priority=task.priority, reminder=task.reminder, reminding_dateTime=task.reminding_dateTime)
+                                                           status=task.status, priority=task.priority)
     conn.execute(stmt)
     return ''
 
@@ -41,7 +40,6 @@ def get_tasks_by_project(id):
 @app.route('/tasks', methods=['GET'])
 def get_tasks():
 
-    
     id_user = get_user_idJWT()
     if id_user:
         sess = Session()

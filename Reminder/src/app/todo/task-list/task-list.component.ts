@@ -12,15 +12,15 @@ import { Moment } from 'moment';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-// tslint:disable-next-line
-//https://danielykpan.github.io/date-time-picker/
+  // tslint:disable-next-line
+  //https://danielykpan.github.io/date-time-picker/
 
   // tslint:disable-next-line:quotemark
   TodayDate: Date;
   commentM: CommentService;
   projectM: GoalService;
   TaskM: TaskService;
-  lastTaskDate: Date = new Date();
+  lastTaskDate: Date;
   tasksSubscription: Subscription;
   constructor(private connectionAPI: APIService) {
     this.TodayDate = new Date();
@@ -37,7 +37,7 @@ export class TaskListComponent implements OnInit {
   }
   // tslint:disable-next-line:max-line-length
   AddTaskButtonClick(title: HTMLInputElement, date: any, project: HTMLInputElement, addTaskForm: any, thisButton: any): void {
-    
+
     this.TaskM.Add(title.value, new Date(date.selected._i), parseInt(project.value, 10));
     debugger
     this.ResetAddFrom(title, date, addTaskForm, thisButton);
@@ -52,7 +52,13 @@ export class TaskListComponent implements OnInit {
   {
     let taskDate = new Date(date);
     taskDate = new Date(taskDate.getFullYear(), taskDate.getMonth(), taskDate.getDate());
-    if (this.lastTaskDate.toISOString() !== taskDate.toISOString()) {
+    if (this.lastTaskDate === undefined)
+    {
+      this.lastTaskDate = taskDate;
+ 
+       return true;
+    }
+    if (this.lastTaskDate.toISOString() !== taskDate.toISOString() && (this.lastTaskDate >= new Date())) {
       this.lastTaskDate = taskDate;
       return true;
     }
@@ -93,6 +99,8 @@ export class TaskListComponent implements OnInit {
       const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
       return days[date.getDay()];
     }
+    else if (Difference < 0)
+      return "Zaległe";
     else {
       return dateString.substring(0, 10);
     }
