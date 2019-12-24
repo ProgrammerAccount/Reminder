@@ -3,10 +3,29 @@ import { DayComponent } from '../day/day.component';
 import { EventService } from '../event.service';
 import { CalendarService } from '../calendar.service';
 import { Calendar } from '../calendar';
+import { DateTimeAdapter, OWL_DATE_TIME_LOCALE, OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
+import { MomentDateTimeAdapter } from 'ng-pick-datetime-moment';
+export const MY_MOMENT_FORMATS = {
+  parseInput: 'l LT',
+  fullPickerInput: 'llll',
+  datePickerInput: 'l',
+  timePickerInput: 'LT',
+  monthYearLabel: 'MMM YYYY',
+  dateA11yLabel: 'LL',
+  monthYearA11yLabel: 'MMMM YYYY',
+};
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.css']
+  styleUrls: ['./calendar.component.css'],
+ 
+    providers:[
+      
+      {provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE] },
+      {provide: OWL_DATE_TIME_FORMATS, useValue: MY_MOMENT_FORMATS},
+      {provide: OWL_DATE_TIME_LOCALE, useValue: 'pl'},
+    ]
+
 })
 export class CalendarComponent implements OnInit {
   private DateString: String; //DateString jest nagłówkiem kalendarza na przykład: November 2019
