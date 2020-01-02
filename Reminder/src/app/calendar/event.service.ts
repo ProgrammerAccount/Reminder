@@ -7,23 +7,19 @@ import { TaskService } from '../todo/task.service';
   providedIn: 'root'
 })
 export class EventService extends TaskService {
-  
+
 
   constructor(connectionAPI: APIService) {
     super(connectionAPI);
   }
-  GetNotyfication(Events:Array<CalendarEvent>) {
-    let i = 0;
-    Events.forEach(element => {
-      this.connectionAPI.getObjects(URL.API_EVENT_NOTYFICATION + '/' + element.id).subscribe(notyfications => {
-        Events[i].reminders = notyfications
-        i++;
-      });
-    });
+  GetNotyfication(event_id) {
+
+    return this.connectionAPI.getObjects(URL.API_EVENT_NOTYFICATION + '/' + event_id)
+
   }
   RemoveNotyfication(event_id: number, time: number) {
     this.connectionAPI
-      .removeObject(URL.API_EVENT_NOTYFICATION + '/' + event_id+ '/' + time).subscribe(() => {
+      .removeObject(URL.API_EVENT_NOTYFICATION + '/' + event_id + '/' + time).subscribe(() => {
 
       });
   }
@@ -34,8 +30,7 @@ export class EventService extends TaskService {
       })
 
   }
-  UpdateNotyfication(notyfication:Notyfication)
-  {
-    this.connectionAPI.updateObjects(URL.API_EVENT_NOTYFICATION,notyfication).subscribe(() =>{})
+  UpdateNotyfication(notyfication: Notyfication) {
+    this.connectionAPI.updateObjects(URL.API_EVENT_NOTYFICATION, notyfication).subscribe(() => { })
   }
 }

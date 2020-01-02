@@ -29,7 +29,7 @@ export const MY_MOMENT_FORMATS = {
 
 })
 export class CalendarComponent implements AfterViewInit {
-  public Events:Array<CalendarEvent>;
+  public Events: Array<CalendarEvent>;
   public Calendars = new Array<Goal>();
   public eventToDisplay = new Array<CalendarEvent>();
   private DateString: String; //DateString jest nagłówkiem kalendarza na przykład: November 2019
@@ -110,8 +110,9 @@ export class CalendarComponent implements AfterViewInit {
 
   }
   EventsLoadingComplet() {
-    
-    this.selectedDay.filterEventByDate();
+
+    this.selectedDay.LoadEvents();
+    this.eventService.GetNotyfication(this.Events);
 
   }
   GetNextCalendar() { // Po nacisnieciu strzałki w prawo generuje następny kalendarz z tablicy
@@ -148,7 +149,7 @@ export class CalendarComponent implements AfterViewInit {
       this.DisplayYear
       }`;
   }
-  GenerateCalendarDate(startDate:Date) { //Przypisuje numery dni miesiąca do miejsc w tablicy month  w generowanym kalendarzu
+  GenerateCalendarDate(startDate: Date) { //Przypisuje numery dni miesiąca do miejsc w tablicy month  w generowanym kalendarzu
     this.month = [];
 
     startDate = new Date(startDate)
@@ -157,7 +158,7 @@ export class CalendarComponent implements AfterViewInit {
       for (let j = 0; j < 7; j++) {
         this.month[i].push(startDate);
         startDate.setDate(startDate.getDate() + 1);
-        startDate = new Date(startDate.getFullYear(),startDate.getMonth(),startDate.getDate());
+        startDate = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
 
       }
     }
@@ -171,7 +172,9 @@ export class CalendarComponent implements AfterViewInit {
   SelectDay(day) { // Kiedy urzytkownik nacisnie na numer dnia funkcja przypisuje zmienna typu DayComponent do selectedDay i pilnuje by wybrany był tylko jeden dzien 
     // Selected day can be only one
     if (this.selectedDay !== undefined) {
+
       this.selectedDay.isSelected = false;
+      this.selectedDay.LoadEvents();
     }
     this.selectedDay = day;
     this.selectedDay.isSelected = true;
@@ -182,7 +185,7 @@ export class CalendarComponent implements AfterViewInit {
     if (this.DisplayMonth > 11) {
       this.DisplayMonth = this.DisplayMonth - 12;
       this.DisplayYear++;
-      
+
     }
     if (this.DisplayMonth < 0) {
       this.DisplayMonth = 12 + this.DisplayMonth;
@@ -195,10 +198,9 @@ export class CalendarComponent implements AfterViewInit {
   AddEvent(title: HTMLInputElement, time: HTMLInputElement) {
     let date = new Date(this.selectedDay.date);
     date.setTime(date.getTime() + new Date(time.valueAsDate).getTime());
-    this.eventService.Add(title.value, date, this.SelectedCalendar.id,2).subscribe(
+    this.eventService.Add(title.value, date, this.SelectedCalendar.id, 2).subscribe(
       (res) => {
         this.Events.push(res);
-        this.eventToDisplay.push(res)
       },
       (err) => { console.error },
       () => { this.EventsLoadingComplet() });

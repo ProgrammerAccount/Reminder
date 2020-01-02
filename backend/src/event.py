@@ -29,9 +29,10 @@ def add_eventnotyfication(id_event):
         sess = Session()
         sess.add(event_notyfication)
         sess.commit()
+        notyficationSchema = NotificationSchema().dump(event_notyfication)
         sess.close()
 
-        return '', 201
+        return jsonify(notyficationSchema), 201
     return ''
 
 

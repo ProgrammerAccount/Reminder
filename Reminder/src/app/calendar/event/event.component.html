@@ -1,4 +1,4 @@
-<div (click)="OpenPopUpMenu(menu)">
+<div (click)="OpenPopUpMenu(menu); LoadNotyfication()">
 
     <div class="content">{{event.title}}</div>
 
@@ -16,7 +16,7 @@
     </div>
     <div class="dateTime">
         <input #date class="EventDate" [owlDateTime]="EventDate" [(value)]="event.date" [owlDateTimeTrigger]="EventDate"
-            [(ngModel)]="event.date" (ngModelChange)="eventService.Edit(event)">
+            [(ngModel)]="event.date" (ngModelChange)="UpdateDate(event)">
         <owl-date-time #EventDate></owl-date-time>
     </div>
 

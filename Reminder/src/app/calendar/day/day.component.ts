@@ -43,17 +43,19 @@ export class DayComponent implements OnInit {
   }
   public filterEventByDate(): Array<Task> {
     let eventToDisplay = new Array<Task>();
-
-    
     this.events.map((x) => {
       let date = new Date(x.date);
-      console.log(`${date.getFullYear()} === ${this.date.getFullYear()} && ${date.getMonth()} === ${this.date.getMonth()} && ${date.getDate()} === ${this.date.getDate()}`)
       if (date.getFullYear() === this.date.getFullYear() && date.getMonth() === this.date.getMonth() && date.getDate() === this.date.getDate())
         eventToDisplay.push(x);
-        
     })
-    debugger
     return eventToDisplay;
+  }
+  LoadEvents() {
+    if (this.isEvent()) {
+      this.setEvent();
+    }
+    this.eventToDisplay.emit(this.filterEventByDate());
+
   }
   ngAfterViewInit() {
     //this.eventService.Get(`/${this.id_project}/${this.date.getFullYear()}-${this.date.getMonth() + 1}-${this.date.getDate()}`);
@@ -63,12 +65,11 @@ export class DayComponent implements OnInit {
     if (this.isSelected) {
       this.OnSelectChange('#ccc');
       this.eventToDisplay.emit(this.filterEventByDate());
-
     }
   }
   ngOnInit() {
     this.day = this.date.getDate().toString();
-    }
+  }
   OnSelectChange(color: string) {
     this.dayHTMLElement.nativeElement.style.backgroundColor = color;
   }
