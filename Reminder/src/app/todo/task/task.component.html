@@ -1,5 +1,5 @@
 <div class="container" [@remove]=stateRemove *ngIf="task">
-  <mat-checkbox [(ngModel)]="task.status" class="checkbox" color="warn" name="done" (click)="sendRemoveRequest()">
+  <mat-checkbox  class="checkbox" color="warn" name="done" (click)="sendRemoveRequest()">
   </mat-checkbox>
   <input (change)="sendEditRequest()" [(ngModel)]="task.title" class="title" type="text">
   <!--<div class="td_icon">
@@ -23,10 +23,18 @@
   <mat-menu #menu="matMenu">
     <button [owlDateTimeTrigger]="dtMenu" mat-menu-item> <i class="icon-calendar"></i>
       <span>{{ GetDate(task.date) }}</span>
-      <input #date type="owlDateTime" [owlDateTime]="dtMenu" (ngModelChange)="ChangeTaskDate(date)"
+      <input #date type="owlDateTime" [owlDateTime]="dtMenu" (ngModelChange)="ChangeTaskDate(task.date)"
         [(value)]="task.date" [(ngModel)]="task.date" style="visibility: hidden;">
       <owl-date-time #dtMenu></owl-date-time>
     </button>
+
+    <button [owlDateTimeTrigger]="dtMenuTimer" mat-menu-item> <i class="icon-calendar"></i>
+      <span>{{ task_time_string }}</span>
+      <input #date [owlDateTime]="dtMenuTimer" (ngModelChange)="TimeChange(task_time)"
+        [(value)]="task_time" [(ngModel)]="task_time" style="visibility: hidden;">
+      <owl-date-time [pickerType]="'timer'" #dtMenuTimer></owl-date-time>
+    </button>
+    
     <app-timer-widget class="MenuSubTimer" [taskID]="task.id" [taskTitle]="task.title"></app-timer-widget>
 
 

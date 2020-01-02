@@ -13,7 +13,7 @@ class TasksSchema(Schema):
     id_project = fields.Number()
     date = fields.DateTime()
     queue = fields.Number()
-    status = fields.Bool()
+    status = fields.Number()
     priority = fields.Number()
     id_user = fields.Number()
     id = fields.Number()
@@ -26,7 +26,8 @@ class Tasks(Base):
     id_project = Column(Integer,  ForeignKey("projects.id"), nullable=True)
     date = Column(DateTime, default=datetime.datetime.now())
     queue = Column(Integer)
-    status = Column(Boolean)
+    #STATUS STATE {0: zwykłe zadanie, 1:zadanie zrealizowane, 2: event}
+    status = Column(Integer)
     priority = Column(Integer)
     id_user = Column(Integer, ForeignKey('user.id'))
     subTimer = relationship("SubTimer", backref="task")

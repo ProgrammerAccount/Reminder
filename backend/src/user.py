@@ -4,6 +4,7 @@ from .dbORMS.user import User, UserSchema
 from flask import jsonify, request
 from .main import app, JWT_SECRET, JWT_ALGORITHM
 from .dbORMS.dbConn import Session
+from .dbORMS.projects import Projects
 salt = 'njk546jnkioll45njk231e4'
 
 
@@ -42,7 +43,9 @@ def register():
         else:
             user = User(email, hashlib.sha256(
                 (password+salt).encode('utf-8')).hexdigest())
+            user.projects.append(Projects(title="Inbox",id_user=user.id))
             sess.add(user)
             sess.commit()
+
             sess.close()
             return "Sukcess", 201

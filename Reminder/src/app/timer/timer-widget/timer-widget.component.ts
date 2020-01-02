@@ -18,28 +18,16 @@ export class TimerWidgetComponent implements OnInit {
   }
 
   Start() {
-    this.SubTimerM.Add(this.taskID);
-    this.SubTimerM.RunningTimer = new Timer(null, new Date(), null, this.taskID, this.taskTitle);
-  }
-  Stop(): any {
-    // Find running Timer
-    const subTimer = this.SubTimerM.objects.find((el) => {
-      if (el.stop === null) {
-        return el;
-      }
+    this.Stop(this.SubTimerM.RunningTimer);
+    this.SubTimerM.Add(this.taskID).subscribe((res) => {
+      this.SubTimerM.RunningTimer = res
     });
+  }
+  Stop(timer: Timer): any {
+    // Find running Timer
 
-    let subTimerID;
-    const timer_stop = new Date();
-    const subtimerindex = this.SubTimerM.objects.indexOf(subTimer);
-    if (subtimerindex !== -1) {
-      this.SubTimerM.objects[subtimerindex].stop = timer_stop;
-      subTimerID = subTimer.id;
-    }
-    else {
-      subTimerID = this.SubTimerM.RunningTimer.id; // DateBase return running timer id instead of true
-    }
-    this.apiService.updateObjects(URL.API_SUB_TIMER, { id: subTimerID, stop: timer_stop })
+    timer.stop = new Date();
+    this.apiService.updateObjects(URL.API_SUB_TIMER, { id: timer.id, stop: timer.stop })
       .subscribe((data) => {
         this.SubTimerM.RunningTimer = null;
         return data;

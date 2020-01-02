@@ -12,7 +12,7 @@ class User(Base):
     password = Column(String(250))
     task = relationship("Tasks", backref='user')
     rutines = relationship("Rutines")
-
+    projects = relationship("Projects")
     def __init__(self, email, password, id=None):
         self.email = email
         self.password = password

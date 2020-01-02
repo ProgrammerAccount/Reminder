@@ -1,9 +1,9 @@
-<header *ngIf="calendarService.objects !== undefinded">
-    <div class="titleBarWithArrowContainer calendarName" *ngIf="SelectedCalendarName !== ''">
+<header *ngIf="Calendars !== undefinded">
+    <div class="titleBarWithArrowContainer calendarName" *ngIf="SelectedCalendar.title !== ''">
         <div class="arrow" (click)="GetForwardCalendar()"><i class="material-icons" style="font-size: 33px">
                 keyboard_arrow_left
             </i></div>
-        <h3 class="content">{{SelectedCalendarName}}</h3>
+        <h3 class="content">{{SelectedCalendar.title}}</h3>
         <div class="arrow" (click)="GetNextCalendar()"><i class="material-icons" style="font-size: 33px">
                 keyboard_arrow_right
             </i></div>
@@ -18,13 +18,13 @@
         <div class="arrow forwardMonth" (click)="ChangeMonth(DisplayMonth-1)"><i class="material-icons">
                 keyboard_arrow_left
             </i></div>
-        <div class="content">{{DateString}}</div>
+        <div class="content">{{GetCalendarHeader()}}</div>
         <div class="arrow nextMonth" (click)="ChangeMonth(DisplayMonth+1)"><i class="material-icons">
                 keyboard_arrow_right
             </i></div>
     </div>
 
-    <table>
+    <table *ngIf="Events != undefinded">
         <tr>
             <th>Mon</th>
             <th>Tue</th>
@@ -35,19 +35,24 @@
             <th>Sun</th>
         </tr>
         <tr *ngFor="let week of month ">
-            <td *ngFor="let day of week ">
-                <app-day #dayObject (click)="SelectDay(dayObject) " [event]="day?.event " [date]="day.date "></app-day>
+            <td *ngFor="let date of week ">
+                <app-day #dayObject (click)="SelectDay(dayObject)" [events]="Events"
+                    (eventToDisplay)="EventsToDisplay($event)" [date]="date"></app-day>
+                <span *ngIf="!selectedDay">{{DefaultSelectedDay(dayObject)
+}}</span>
             </td>
         </tr>
     </table>
 
     <ul class="eventList ">
-        <li *ngFor="let event of eventService.objects " class="event "> <app-event [event]= "event" ></app-event></li>
+        <li *ngFor="let event of eventToDisplay" class="event ">
+            <app-event [event]="event"></app-event>
+        </li>
     </ul>
     <div *ngIf="selectedDay != null">
         <div class="addEvent " ng-init="addFromShow=false">
             <div *ngIf="!addFromShow" class="addBtnForm">
-                <div *ngIf="eventService.objects == []" class="content ">No events for this month</div>
+                <div *ngIf="Events == []" class="content ">No events for this month</div>
                 <button (click)="addFromShow = true" class="addButton ">+</button>
             </div>
             <div *ngIf="addFromShow" class="addBtnForm">
@@ -55,9 +60,9 @@
                     <input placeholder="Title" class="title" #title type="text" />
                     <input class="time" #time type="time" />
                 </div>
-                 <!-- submitButton class have set every property with important --> 
-                 <i class="submitButton material-icons" 
-                  (click)="AddEvent(title,time); ResetInput(time); ResetInput(title); addFromShow=false">
+                <!-- submitButton class have set every property with important -->
+                <i class="submitButton material-icons"
+                    (click)="AddEvent(title,time); ResetInput(time); ResetInput(title); addFromShow=false">
                     send
                 </i>
             </div>

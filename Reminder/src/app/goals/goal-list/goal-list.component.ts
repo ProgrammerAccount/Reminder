@@ -3,10 +3,6 @@ import { TaskService } from 'src/app/todo/task.service';
 import { GoalService } from '../goal.service';
 import { Subscription } from 'rxjs';
 import { Goal } from '../goal';
-import { APIService } from 'src/app/api.service';
-import { Moment } from 'moment';
-import { OwlDateTimeComponent } from 'ng-pick-datetime';
-import { MomentDateTimeModule } from 'ng-pick-datetime-moment/moment-adapter/moment-date-time.module';
 
 @Component({
   selector: 'app-goal-list',
@@ -14,12 +10,9 @@ import { MomentDateTimeModule } from 'ng-pick-datetime-moment/moment-adapter/mom
   styleUrls: ['./goal-list.component.css']
 })
 export class GoalListComponent implements OnInit {
-  goalsManager: GoalService;
-  goalsSubscription: Subscription;
   TodayDate: Date;
-  taskService: TaskService
+  Goals: Array<Goal>;
   ngOnDestroy(): void {
-    this.goalsSubscription.unsubscribe();
   }
   ngOnInit(): void {
 
@@ -37,7 +30,7 @@ export class GoalListComponent implements OnInit {
     }
   }
   // tslint:disable-next-line:max-line-length
-  ResetInputStep(title: HTMLInputElement, date: HTMLInputElement, description: HTMLInputElement, addTaskForm: any, thisButton: any) {
+  ResetInputStep(title: HTMLInputElement, date: HTMLInputElement, description: HTMLInputElement) {
 
     title.value = '';
     date.value = this.TodayDate.toISOString();
@@ -46,14 +39,15 @@ export class GoalListComponent implements OnInit {
   }
 
   stepsManagerInit(goal: Goal) {
-    if (goal.stepService === undefined) {
-      goal.stepService = new TaskService(this.connectionAPI);
-      goal.stepService.Get('/' + goal.id);
+    if (goal.steps === undefined) {
+      this.taskService.Get('/' + goal.id).subscribe((res) => { goal.steps = res }, console.error)
     }
   }
   // tslint:disable-next-line:max-line-length
   AddGoalButtonClick(title: HTMLInputElement) {
-    this.goalsManager.AddGoal(title.value);
+    this.goalsService.AddGoal(title.value).subscribe(res => {
+      this.Goals.push(res);
+    }, console.error);
     this.ResetInputGoal(title);
 
   }
@@ -62,14 +56,16 @@ export class GoalListComponent implements OnInit {
     title.value = '';
   }
   AddTaskButtonClick(goal: Goal, title: HTMLInputElement, date, addTaskForm: any): void {
-    this.taskService.Add(title.value, date.selected.toDate(), goal.id);
-    this.ResetInput(title, date, addTaskForm);
+
+    this.taskService.Add(title.value, new Date(date.value), goal.id).subscribe((res) => { this.Goals.push(res) }, console.error);
+    this.ResetInput(title, date);
 
   }
-  ResetInput(title: HTMLInputElement, date, addTaskForm: any): void {
+  ResetInput(title: HTMLInputElement, date): void {
     title.value = '';
-    date.selected.set(this.TodayDate);
-    debugger
+
+    date.selected.setDate(this.TodayDate);
+
   }//Ustawia formularz dodawania zadań do celu do domyslnych wartosci
 
   HideShowElement(el: any): void {
@@ -79,14 +75,30 @@ export class GoalListComponent implements OnInit {
   // tslint:disable-next-line:use-life-cycle-interface
   ngDoCheck() {
   }
-
+  TaskEdit(task)
+  {
+    this.taskService.Edit(task).subscribe()
+  }
+  TaskRemove(task)
+  {
+    this.taskService.Remove(task).subscribe()
+  }
+  ProjectEdit(project)
+  {
+    this.goalsService.Edit(project).subscribe()
+  }
+  ProjectRemove(project)
+  {
+    this.goalsService.Remove(project).subscribe()
+  }
   DateToStringYYYYMMDD(date: Date): string { //Pobiera zmienna typu Date a zwraca date w formacie YYYY-MM-DD typu string
     return date.toISOString().substring(0, 10);
   }
-  constructor(private connectionAPI: APIService) {
+  constructor(private goalsService: GoalService, private taskService: TaskService) {
     this.TodayDate = new Date();
-    this.goalsManager = new GoalService(this.connectionAPI);
-    this.taskService = new TaskService(connectionAPI);
+    this.goalsService.Get().subscribe((res) => this.Goals = res || [])
+
+
   }
 
 

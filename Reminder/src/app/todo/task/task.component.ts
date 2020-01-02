@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter ,AfterViewInit, OnInit} from '@angular/core';
 import { Task } from '../task';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 @Component({
@@ -19,25 +19,42 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent {
+export class TaskComponent implements OnInit {
   stateRemove = 'init';
   _task: Task;
   @Input() task: Task;
   @Output() taskEdit = new EventEmitter<Task>();
   @Output() taskRemove = new EventEmitter<Task>();
   @Output() timerStart = new EventEmitter<any>();
-
-
+  private task_time: Date = new Date(1970,1,1,0,0,0,0);
+  private task_time_string: string ="";
   constructor() {
   }
-
+  ngOnInit()
+  {
+        this.task_time = this.task.date;
+        let date = new Date(this.task.date)
+        this.task_time_string = date.getHours().toString()+":"+date.getMinutes().toString()
+        
+  }
   HideShowElement(el: any): void {
     const display = window.getComputedStyle(el).getPropertyValue('display');
     if (display !== 'none') { el.style.display = 'none'; } else { el.style.display = 'block'; }
   }
-  ChangeTaskDate(date: HTMLInputElement) {
-    this.task.date = new Date(date.value);
+  ChangeTaskDate(date: any) {
+    this.task.date = new Date(date);
     this.sendEditRequest();
+
+  }
+  TimeChange(timeString: string) {
+    let date = new Date(this.task.date);
+    
+    let time = new Date(this.task_time);
+    date.setHours(time.getHours())
+    date.setMinutes(time.getMinutes())
+    this.task_time_string = date.getHours().toString()+":"+date.getMinutes().toString()
+    this.task.status = 2;
+    this.ChangeTaskDate(date)
 
   }
   TimerStart() {
@@ -46,6 +63,7 @@ export class TaskComponent {
   sendEditRequest() {
     if (this.task.id_project === null) { this.task.id_project = 0; }
     this.taskEdit.emit(this.task); //Wysyła objekt Task do TaskService który wysyła zapytanie do bazy danych mające na celu edycje rekordu
+    
   }
   sendRemoveRequest() {
     this.stateRemove = 'rm';

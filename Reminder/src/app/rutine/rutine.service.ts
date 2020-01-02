@@ -15,9 +15,7 @@ export class RutineService extends AbstractService {
   }
 
   Add(rutines) {
-    this.API.addObjects(URL.API_RUTINES, rutines).subscribe((data) => {
-      this.objects.push(data);
-    });
+    return this.API.addObjects(URL.API_RUTINES, rutines)
   }
 
 }

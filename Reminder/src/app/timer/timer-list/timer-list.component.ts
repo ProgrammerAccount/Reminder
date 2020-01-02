@@ -9,13 +9,14 @@ import { TimerService } from '../timer.service';
 })
 export class TimerListComponent implements OnInit {
   subTimers: Timer[][];
+  Timers: Array<any>;
   constructor(private TM: TimerService) {
-    this.TM.Get('/TaskTitle');
+    this.TM.Get('/TaskTitle').subscribe((res) => { this.Timers = res }, (err) => console.error, () => this.groupSubTimersByDay(this.Timers));
   }
 
-  groupSubTimersByDay() {
+  groupSubTimersByDay(Timers: Array<Timer>) {
     this.subTimers = undefined;
-    this.TM.objects.map(
+    Timers.map(
       (el) => {
         if (this.subTimers === undefined) {
           this.subTimers = new Array();
@@ -36,8 +37,7 @@ export class TimerListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.groupSubTimersByDay();
-   
+
 
   }
 

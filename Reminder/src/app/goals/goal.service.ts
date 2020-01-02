@@ -9,19 +9,14 @@ import { AbstractService } from '../abscract.service';
 })
 export class GoalService extends AbstractService {
 
-  goals: Goal[];
-  goalSubscrion: Subscription;
   TodayDate: string;
   Sort(): void {
   }
   constructor(protected connectionAPI: APIService) {
       super(connectionAPI, URL.API_GOAL);
-      this.Get();
   }
   AddGoal(title: string) {
-      this.connectionAPI.addObjects(URL.API_GOAL, { 'title': title, 'id_user': 1 }).subscribe(res => {
-          this.goals.push(res);
-      }, console.error);
+      return this.connectionAPI.addObjects(URL.API_GOAL, { 'title': title, 'id_user': 1 });
   }
 
 

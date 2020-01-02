@@ -1,9 +1,9 @@
 <main>
-    <div *ngFor="let goal of goalsManager.objects">
+    <div *ngFor="let goal of Goals">
       <table>
         <tr>
           <td class="td_title">
-            <input class="goalTitle" [(ngModel)]="goal.title" (change)="goalsManager.Edit(goal)">
+            <input class="goalTitle" [(ngModel)]="goal.title" (change)="ProjectEdit(goal)">
           </td>
           <td class="td_icon">
             <button mat-icon-button (click)="HideShowElement(commentWindow)">
@@ -16,7 +16,7 @@
                 </button>
               </app-comment>
             </div>
-          <td class="td_icon" (click)= "Remove(goal)">
+          <td class="td_icon" (click)= "ProjectRemove(goal)">
             <button mat-icon-button>
               <mat-icon>delete</mat-icon>
             </button>
@@ -30,8 +30,8 @@
         </tr>
       </table>
       <div #stepsContainer class="stepsContainer">
-        <div *ngFor="let task of goal.stepService?.objects">
-          <app-task [(task)]="task" (taskEdit)="goal.stepService.Edit($event)" (taskRemove)=goal.stepService.Remove($event)></app-task>
+        <div *ngFor="let task of goal.steps">
+          <app-task [(task)]="task" (taskEdit)="TaskEdit($event)" (taskRemove)=TaskRemove($event)></app-task>
         </div>
         <div #addTaskForm class="addTask">
           <table>
@@ -56,7 +56,7 @@
               </td>
               <td class="ADDtd_SubmitButton">
   
-                <button id="btnSubmitAddTask" (click)="AddTaskButtonClick(goal,title,dtAdd,project,addTaskForm)">
+                <button id="btnSubmitAddTask" (click)="AddTaskButtonClick(goal,title,dateFieldAdd,project,addTaskForm)">
                   Add Task
                 </button>
               </td>

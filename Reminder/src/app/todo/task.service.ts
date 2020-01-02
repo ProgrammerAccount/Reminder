@@ -13,15 +13,15 @@ export class TaskService extends AbstractService //Metody Remove Edit i Get Dzie
     super(connectionAPI, URL.API_TASK);
   }
   Sort() {
-    this.sortTaskByQueue(this.objects);
-    this.sortTaskByDate(this.objects);
+   // this.sortTaskByQueue(this.objects);
+   // this.sortTaskByDate(this.objects);
   }
 
-  Add(title: string, date: any, project: number) {
+  Add(title: string, date: any, project: number,status = 1) {
 
     let queue = 0;
     //Ustalanie Kolejnosci w zadaniach
-    if (date !== undefined) {
+   /* if (date !== undefined) {
       if (this.objects.length > 0) {
 
         this.objects.forEach(task => { // getting biggest queue
@@ -31,30 +31,21 @@ export class TaskService extends AbstractService //Metody Remove Edit i Get Dzie
             }
           }
         });
-      }
+      }*/
       // Dodawanie Zadania
-      this.connectionAPI.addObjects(URL.API_TASK,
+      return this.connectionAPI.addObjects(URL.API_TASK,
         {
           'title': title,
           'id_project': project,
           'date': date,
           'queue': queue,
-          'status': false,
+          'status': status,
           'priority': 1,
           'id_user': 1,
         })
-        .subscribe(res => {
-          this.objects.push(res);
-          this.Sort();
-        },
-          console.error
-        );
     }
-  }
-  Remove()
-  {
-    
-  }
+  
+
   // tslint:disable:curly
   sortTaskByQueue(task: Task[]): void {
     task.sort((a, b) => {
@@ -69,7 +60,7 @@ export class TaskService extends AbstractService //Metody Remove Edit i Get Dzie
       return x.getTime() - y.getTime();
     });
   }
-  QuePosiotnChange(task: Task) { // check that tasks have unique id
+  /*QuePosiotnChange(task: Task) { // check that tasks have unique id
     this.sortTaskByQueue(this.objects);
     this.sortTaskByDate(this.objects);
     let foundSameQueue = false;
@@ -91,7 +82,7 @@ export class TaskService extends AbstractService //Metody Remove Edit i Get Dzie
     this.sortTaskByQueue(this.objects);
     this.sortTaskByDate(this.objects);
 
-  }
+  }*/
 
 }
 // tslint:disable-next-line:prefer-const

@@ -6,7 +6,7 @@
         public id_project: number,
         public date: Date,
         public queue: number,
-        public status: boolean,
+        public status: number,
         public priority: number,
         public id_user: number,
     ){}

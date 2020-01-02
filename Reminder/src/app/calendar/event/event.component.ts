@@ -40,8 +40,7 @@ export class EventComponent implements OnInit {
   addEventNotyfication() {
     if (this.event.reminders == undefined)
       this.event.reminders = []
-    this.event.reminders.push(new Notyfication(this.event.id, 600000 ));
-    this.eventService.AddNotyfication(this.event.id,10 * 60000)
+    this.eventService.AddNotyfication(this.event.id,10 * 60000).subscribe((res)=>this.event.reminders.push(res),()=>console.error)
 
   }
   MilisecConverter(miliseconds: number) {

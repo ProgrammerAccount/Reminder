@@ -19,21 +19,13 @@ export class TimerService extends AbstractService {
   }
 
   Add(task_ID): any {
-    this.objects.map((el) => {
-      if (el.stop === null) {
-        el.stop = Date.now();
-      }
-    });
+
     if (task_ID !== undefined) {
-      this.apiService.addObjects(URL.API_SUB_TIMER, { 'start': new Date(), 'id_task': task_ID }).subscribe((data) => {
-        this.objects.push(data);
-      });
+     return this.apiService.addObjects(URL.API_SUB_TIMER, { 'start': new Date(), 'id_task': task_ID });
     }
   }
   Edit(timer: Timer){
-    this.apiService.updateObjects(URL.API_SUB_TIMER,{'start': new Date(timer.start) , 'stop':new Date(timer.stop), 'id': timer.id}).subscribe((data)=>{
-
-    });
+    return this.apiService.updateObjects(URL.API_SUB_TIMER,{'start': new Date(timer.start) , 'stop':new Date(timer.stop), 'id': timer.id})
   }
   getRunningTimer(task_ID) {
     this.apiService.getObjects(URL.API_SUB_TIMER + '/' + task_ID).subscribe((data) => {

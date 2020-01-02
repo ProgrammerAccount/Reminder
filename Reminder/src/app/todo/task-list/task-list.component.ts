@@ -5,6 +5,8 @@ import { TaskService } from '../task.service';
 import { Subscription } from 'rxjs';
 import { APIService } from 'src/app/api.service';
 import { Moment } from 'moment';
+import { Task } from '../task';
+import { Goal } from 'src/app/goals/goal';
 
 @Component({
   selector: 'app-task-list',
@@ -17,29 +19,33 @@ export class TaskListComponent implements OnInit {
 
   // tslint:disable-next-line:quotemark
   TodayDate: Date;
-  commentM: CommentService;
-  projectM: GoalService;
-  TaskM: TaskService;
+  Tasks: Array<Task>;
+  Projects: Array<Goal>;
   lastTaskDate: Date;
-  tasksSubscription: Subscription;
-  constructor(private connectionAPI: APIService) {
+  constructor(private TaskM: TaskService, private projectM: GoalService, private commentM: CommentService) {
     this.TodayDate = new Date();
+    this.TaskM.Get().subscribe((res) => this.Tasks = res);
   }
 
   ngOnDestroy(): void {
-    this.tasksSubscription.unsubscribe();
   }
   ngOnInit(): void {
-    this.commentM = new CommentService(this.connectionAPI);
-    this.TaskM = new TaskService(this.connectionAPI);
-    this.TaskM.Get();
-    this.projectM = new GoalService(this.connectionAPI);
+
+
+  }
+  TaskEdit(task)
+  {
+    this.TaskM.Edit(task).subscribe()
+  }
+  TaskRemove(task)
+  {
+    this.TaskM.Remove(task).subscribe()
   }
   // tslint:disable-next-line:max-line-length
   AddTaskButtonClick(title: HTMLInputElement, date: any, project: HTMLInputElement, addTaskForm: any, thisButton: any): void {
 
-    this.TaskM.Add(title.value, new Date(date.selected._i), parseInt(project.value, 10));
-    debugger
+    this.TaskM.Add(title.value, new Date(date.selected.toISOString()), parseInt(project.value, 10)).subscribe((res) => this.Tasks.push(res), () => { console.error });
+
     this.ResetAddFrom(title, date, addTaskForm, thisButton);
   }
   ResetAddFrom(title: HTMLInputElement, date: HTMLInputElement, addTaskForm: any, thisButton: any): void {
@@ -50,13 +56,13 @@ export class TaskListComponent implements OnInit {
   }
   CanDisplayDate(date: Date): boolean // display date in heder
   {
+    
     let taskDate = new Date(date);
     taskDate = new Date(taskDate.getFullYear(), taskDate.getMonth(), taskDate.getDate());
-    if (this.lastTaskDate === undefined)
-    {
+    if (this.lastTaskDate === undefined) {
       this.lastTaskDate = taskDate;
- 
-       return true;
+
+      return true;
     }
     if (this.lastTaskDate.toISOString() !== taskDate.toISOString() && (this.lastTaskDate >= new Date())) {
       this.lastTaskDate = taskDate;

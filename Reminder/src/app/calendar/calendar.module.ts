@@ -6,6 +6,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { FormsModule } from '@angular/forms';
 import { OwlDateTimeModule, OwlNativeDateTimeModule, DateTimeAdapter, OWL_DATE_TIME_LOCALE, OWL_DATE_TIME_FORMATS } from 'ng-pick-datetime';
 import { MomentDateTimeAdapter } from 'ng-pick-datetime-moment';
+import { EventService } from './event.service';
 
 
 
@@ -20,7 +21,7 @@ import { MomentDateTimeAdapter } from 'ng-pick-datetime-moment';
     CalendarComponent
   ],
   providers: [
-
+    EventService
 
   ]
 })

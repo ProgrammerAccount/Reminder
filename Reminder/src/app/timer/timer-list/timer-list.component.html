@@ -1,4 +1,4 @@
-<main *ngIf="groupSubTimersByDay()">
+<main *ngIf="subTimers!=undefined">
     <div *ngFor="let sb of subTimers">
         <app-timer-daily [date]="sb" [subTimers]="subTimers[sb]"></app-timer-daily>
     </div>

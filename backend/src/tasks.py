@@ -6,11 +6,11 @@ from .dbORMS.tasks import Tasks, TasksSchema
 from .dbORMS.comments import Comment, CommentSchema
 from .dbORMS.comments_to_task import comment_to_task, comment_to_taskSchema
 from sqlalchemy import update, select, and_
-from datetime import datetime
 from .main import get_object, app, HEADER_AUTH, JWT_SECRET, JWT_ALGORITHM, get_user_idJWT
 import jwt
 import json
 import time
+from datetime import datetime, timedelta
 
 
 @app.route('/tasks', methods=['PUT'])
@@ -26,6 +26,17 @@ def update_task():
                                                            status=task.status, priority=task.priority)
     conn.execute(stmt)
     return ''
+
+
+@app.route('/tasks/<int:id>/<string:date_string>')
+def get_tasks_by_project_and_date(id, date_string):
+    session = Session()
+    date = datetime.strptime(date_string, '%Y-%m-%d')
+    task_objects = session.query(Tasks).filter(and_(
+        Tasks.id_project == id, Tasks.date > date, Tasks.date <date + timedelta(days=1)))
+    tasks = TasksSchema(many=True).dump(task_objects)
+    session.close()
+    return jsonify(tasks)
 
 
 @app.route('/tasks/<int:id>')
@@ -44,7 +55,7 @@ def get_tasks():
     if id_user:
         sess = Session()
         response = sess.query(Tasks).filter(
-            and_(Tasks.status == 0, Tasks.id_user == id_user))
+            and_(Tasks.status != 1, Tasks.id_user == id_user))
         tasks = TasksSchema(many=True).dump(response)
         sess.close()
         return jsonify(tasks)

@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { MatIconModule, MatInputModule, MatCheckboxModule, MatMenuModule, MatSelectModule } from '@angular/material';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { TimerModule } from '../timer/timer.module';
+import { GoalService } from '../goals/goal.service';
+import { CommentService } from '../comment/comment.service';
 
 
 
@@ -20,12 +22,13 @@ import { TimerModule } from '../timer/timer.module';
     MatCheckboxModule,
     OwlNativeDateTimeModule,
     CommonModule
-    ,MatInputModule,
+    , MatInputModule,
     TimerModule,
     MatMenuModule,
     MatSelectModule
   ],
-  exports:[
-    TaskListComponent,TaskComponent  ]
+  exports: [
+    TaskListComponent, TaskComponent],
+  providers: [TaskService, GoalService, CommentService]
 })
 export class TodoModule { }

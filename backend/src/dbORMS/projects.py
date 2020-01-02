@@ -1,7 +1,7 @@
 
 from .dbConn import Base
 import datetime
-from sqlalchemy import create_engine, Column, String, Integer, DateTime, Boolean
+from sqlalchemy import create_engine, Column, String, Integer, DateTime, Boolean,ForeignKey
 from sqlalchemy.orm import relationship
 from marshmallow import Schema, fields
 
@@ -17,7 +17,7 @@ class Projects(Base):
     __tablename__ = 'projects'
     id = Column(Integer, primary_key=True)
     title = Column(String(50))
-    id_user = Column(Integer)
+    id_user = Column(Integer, ForeignKey('user.id'))
     tasks = relationship("Tasks", backref="project")
     comments = relationship("comment_to_project", backref="project")
 

@@ -1,8 +1,8 @@
 <main>
-    <div *ngFor="let task of TaskM.objects; let index = index" class="task">
+    <div *ngFor="let task of Tasks" class="task">
       <h3 *ngIf="CanDisplayDate(task.date)">{{ GetDate(task.date) }}</h3>
-      <app-task [task]="task" (taskEdit)="TaskM.Edit($event)" (timerStart)="TimerStart(task.title, task.id)"
-        (taskRemove)="TaskM.Remove($event)"></app-task>
+      <app-task [task]="task" (taskEdit)="TaskEdit($event)" (timerStart)="TimerStart(task.title, task.id)"
+        (taskRemove)="TaskRemove($event)"></app-task>
     </div>
   
     <div #addTaskForm class="addTask NotDisplay">
@@ -12,14 +12,14 @@
         <mat-select id="project" [value]="0" #project>
           <mat-option [value]="0">NONE</mat-option>
   
-          <mat-option *ngFor="let project of projectM.objects" [value]="project.id">
+          <mat-option *ngFor="let project of Projects" [value]="project.id">
             {{ project.title }}
           </mat-option>
         </mat-select>
       </div>
       <div class="dateButtonContainer">
-        <input class="date" [owlDateTimeTrigger]="dtAdd" [(ngModel)]="TodayDate" #dateFieldAdd [owlDateTime]="dtAdd" />
-        <owl-date-time [startAt]="TodayDate" #dtAdd></owl-date-time>
+        <input class="date" [owlDateTimeTrigger]="dtAdd"  [(ngModel)]="TodayDate" #dateFieldAdd [owlDateTime]="dtAdd" />
+        <owl-date-time [pickerType]="'calendar'" [startAt]="TodayDate" #dtAdd></owl-date-time>
         <div class="emptySpace"></div>
         <button id="btnCancelAddTask" (click)="ResetAddFrom(title, dateFieldAdd, addTaskForm, showForm)">
           Cancel
